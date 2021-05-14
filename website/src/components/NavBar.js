@@ -8,6 +8,7 @@ import {
   Box,
   Link,
   Button,
+  Hidden,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,16 +46,21 @@ export default function Navbar() {
         className={classes.navBar}
         elevation={0}
         color="primary"
+        style={{ height: "20%" }}
       >
         <Toolbar>
           <Grid container className={classes.navbarGrid}>
-            <Grid item className={classes.navLink}>
-              <img
-                src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
-                style={{ height: "50px", maxWidth: "75px" }}
-                alt=""
-              ></img>
-            </Grid>
+            <Hidden smDown={true}>
+              <Grid item className={classes.navLink}>
+                <img
+                  src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
+                  style={{ height: "50px", maxWidth: "75px" }}
+                  alt=""
+                  sm={0}
+                ></img>
+              </Grid>
+            </Hidden>
+
             <Grid item>
               <Box display="flex" className={classes.navContainer}>
                 <Link className={classes.navLink}>Home</Link>

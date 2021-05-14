@@ -1,5 +1,5 @@
 import "./App.css";
-import Navbar from "./components/NavBar";
+import Landing from "./page/Landing Page";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
@@ -18,7 +18,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Navbar />
+        <Landing />
       </div>
     </ThemeProvider>
   );
