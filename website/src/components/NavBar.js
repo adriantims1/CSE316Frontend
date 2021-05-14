@@ -6,10 +6,10 @@ import {
   makeStyles,
   withStyles,
   Box,
-  Link,
   Button,
   Hidden,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   navBar: {},
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
     fontSize: "16px",
     margin: theme.spacing(3),
+    textTransform: "capitalize",
   },
   navContainer: {
     alignItems: "center",
@@ -52,21 +53,56 @@ export default function Navbar() {
           <Grid container className={classes.navbarGrid}>
             <Hidden smDown={true}>
               <Grid item className={classes.navLink}>
-                <img
-                  src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
-                  style={{ height: "50px", maxWidth: "75px" }}
-                  alt=""
-                  sm={0}
-                ></img>
+                <Link href="/">
+                  <img
+                    src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
+                    style={{ height: "50px", maxWidth: "75px" }}
+                    alt=""
+                    sm={0}
+                  ></img>
+                </Link>
               </Grid>
             </Hidden>
 
             <Grid item>
               <Box display="flex" className={classes.navContainer}>
-                <Link className={classes.navLink}>Home</Link>
-                <Link className={classes.navLink}>About</Link>
-                <Link className={classes.navLink}>Live Trades</Link>
-                <Link className={classes.navLink}>Contact</Link>
+                <Button
+                  className={classes.navLink}
+                  href="/"
+                  variant="text"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  Home
+                </Button>
+                <Button
+                  className={classes.navLink}
+                  variant="text"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  About
+                </Button>
+                <Button
+                  className={classes.navLink}
+                  variant="text"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  Live Trades
+                </Button>
+                <Button
+                  className={classes.navLink}
+                  variant="text"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  Contact
+                </Button>
                 <StyledButton
                   variant="contained"
                   className={classes.navLink}

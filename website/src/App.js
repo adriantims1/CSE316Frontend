@@ -1,6 +1,7 @@
 import "./App.css";
 import Landing from "./page/Landing Page";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { Switch, Route } from "react-router-dom";
 
 const theme = createMuiTheme({
   palette: {
@@ -18,7 +19,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Landing />
+        <Switch>
+          <Route path="/" component={Landing} />
+        </Switch>
       </div>
     </ThemeProvider>
   );
