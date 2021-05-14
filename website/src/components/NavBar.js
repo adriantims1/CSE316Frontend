@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Login from "./Login";
 import {
   AppBar,
   Toolbar,
@@ -9,6 +10,7 @@ import {
   Button,
   Hidden,
   Link,
+  Slide,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +42,7 @@ const StyledButton = withStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
+  const [login, setLogin] = useState(false);
   return (
     <>
       <AppBar
@@ -87,6 +90,9 @@ export default function Navbar() {
                   className={classes.navLink}
                   color="secondary"
                   size="medium"
+                  onClick={(e) => {
+                    setLogin((prev) => !prev);
+                  }}
                 >
                   Login
                 </StyledButton>
@@ -95,6 +101,11 @@ export default function Navbar() {
           </Grid>
         </Toolbar>
       </AppBar>
+      <Slide direction="left" in={login}>
+        <div>
+          <Login />
+        </div>
+      </Slide>
     </>
   );
 }
