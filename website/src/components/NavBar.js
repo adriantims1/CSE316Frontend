@@ -75,7 +75,11 @@ export default function Navbar() {
                 <Link className={classes.navLink} href="/live" underline="none">
                   Live Trades
                 </Link>
-                <Link className={classes.navLink} underline="none">
+                <Link
+                  className={classes.navLink}
+                  href="/contact"
+                  underline="none"
+                >
                   Contact
                 </Link>
                 <StyledButton

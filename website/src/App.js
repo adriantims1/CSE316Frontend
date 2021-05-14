@@ -1,6 +1,7 @@
 import "./App.css";
 import Landing from "./page/Landing Page";
 import Live from "./page/Live Trades";
+import Contact from "./page/Contact Page";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
 
@@ -22,7 +23,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/live" component={Live} />
-
+          <Route path="/contact" component={Contact} />
           <Route path="/" component={Landing} />
         </Switch>
       </div>
