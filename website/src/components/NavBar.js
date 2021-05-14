@@ -8,8 +8,8 @@ import {
   Box,
   Button,
   Hidden,
+  Link,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   navBar: {},
@@ -66,43 +66,18 @@ export default function Navbar() {
 
             <Grid item>
               <Box display="flex" className={classes.navContainer}>
-                <Button
-                  className={classes.navLink}
-                  href="/"
-                  variant="text"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
+                <Link className={classes.navLink} href="/" underline="none">
                   Home
-                </Button>
-                <Button
-                  className={classes.navLink}
-                  variant="text"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
+                </Link>
+                <Link className={classes.navLink} underline="none">
                   About
-                </Button>
-                <Button
-                  className={classes.navLink}
-                  variant="text"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
+                </Link>
+                <Link className={classes.navLink} href="/live" underline="none">
                   Live Trades
-                </Button>
-                <Button
-                  className={classes.navLink}
-                  variant="text"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
+                </Link>
+                <Link className={classes.navLink} underline="none">
                   Contact
-                </Button>
+                </Link>
                 <StyledButton
                   variant="contained"
                   className={classes.navLink}

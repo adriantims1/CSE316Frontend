@@ -7,7 +7,6 @@ import {
   withStyles,
   Typography,
   Button,
-  Box,
 } from "@material-ui/core";
 
 import InstagramIcon from "@material-ui/icons/Instagram";
@@ -124,6 +123,7 @@ const Landing = () => {
             <img
               src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620962204/picture_pqypsw.svg"
               style={{ height: "75%" }}
+              alt=""
             ></img>
           </Grid>
         </Grid>
