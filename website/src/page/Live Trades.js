@@ -1,25 +1,20 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-import {
-  Container,
-  makeStyles,
-  Grid,
-  Typography,
-  Box,
-} from "@material-ui/core";
+import { Paper, makeStyles, Grid, Typography, Box } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
   bodyContainer: {
     height: "80vh",
-    width: "100vw",
+    width: "95vw",
     backgroundColor: theme.palette.primary.main,
     alignItems: "inline",
 
+    margin: "0px 2%",
     display: "flex",
   },
   leftContainer: {
     height: "100%",
-    width: "70%",
+    width: "80%",
   },
   rightContainer: {
     height: "100%",
@@ -41,7 +36,7 @@ const Live = () => {
   return (
     <>
       <NavBar />
-      <Container className={classes.bodyContainer}>
+      <Paper elevation={0} className={classes.bodyContainer}>
         <Grid
           container
           justify="flex-start"
@@ -81,7 +76,7 @@ const Live = () => {
             }}
           ></Grid>
         </Grid>
-      </Container>
+      </Paper>
     </>
   );
 };

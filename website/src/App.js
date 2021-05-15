@@ -23,10 +23,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Switch>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/live" component={Live} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/" component={Landing} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/live" component={Live} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/" component={Landing} />
+          <Route path="*" exact={true}>
+            <div>Not Found</div>
+          </Route>
         </Switch>
       </div>
     </ThemeProvider>

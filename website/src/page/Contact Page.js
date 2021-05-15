@@ -32,9 +32,11 @@ const StyledButton = withStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.secondary.main,
     color: "white",
+    width: "300px",
   },
   label: {
     textTransform: "capitalize",
+    fontSize: "24px",
   },
 }))(Button);
 

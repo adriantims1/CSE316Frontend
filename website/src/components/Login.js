@@ -26,6 +26,13 @@ const styles = makeStyles((theme) => ({
     flexDirection: "column",
   },
 }));
+const LoginButton = withStyles((theme) => ({
+  label: {
+    textTransform: "capitalize",
+    fontSize: "24px",
+  },
+}))(Button);
+
 const StyledButton = withStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.secondary.main,
@@ -46,22 +53,22 @@ function Login() {
       <Paper elevation={3} className={classes.root}>
         <Grid></Grid>
         <Box display="flex" style={{ alignSelf: "center" }}>
-          <Button
+          <LoginButton
             onClick={(e) => {
               e.preventDefault();
               setLogin(true);
             }}
           >
             Login
-          </Button>
-          <Button
+          </LoginButton>
+          <LoginButton
             onClick={(e) => {
               e.preventDefault();
               setLogin(false);
             }}
           >
             SignUp
-          </Button>
+          </LoginButton>
         </Box>
         <Grid container direction="column" justify="center" alignItems="center">
           {login ? (

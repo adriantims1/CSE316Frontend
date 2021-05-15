@@ -13,8 +13,8 @@ const styles = makeStyles((theme) => ({
 export default function TransactionCard() {
   const classes = styles();
   return (
-    <Container>
-      <Card elevation={4} className={classes.card}>
+    <Container style={{ height: "18%" }}>
+      <Card style={{ height: "80%" }} elevation={4} className={classes.card}>
         <CardContent></CardContent>
       </Card>
     </Container>

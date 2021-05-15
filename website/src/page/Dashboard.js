@@ -94,13 +94,17 @@ export default function Dashboard() {
                 display="flex"
                 style={{
                   justifyContent: "space-between",
-                  width: "23%",
+
                   alignItems: "center",
                 }}
               >
                 <img
                   src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
-                  style={{ height: "50px", width: "50px" }}
+                  style={{
+                    height: "50px",
+                    width: "50px",
+                    paddingRight: "16px",
+                  }}
                 ></img>
                 <Box
                   display="flex"
@@ -215,9 +219,11 @@ export default function Dashboard() {
                 Last 5 Transactions
               </Typography>
             </Container>
-            {["", "", "", "", ""].map((element) => (
-              <TransactionCard />
-            ))}
+            <Box style={{ height: "60%" }}>
+              {["", "", "", "", ""].map((element) => (
+                <TransactionCard />
+              ))}
+            </Box>
           </Paper>
         </Grid>
       </Grid>

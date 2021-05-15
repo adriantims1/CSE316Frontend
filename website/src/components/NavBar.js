@@ -6,27 +6,49 @@ import {
   Grid,
   makeStyles,
   withStyles,
-  Box,
+  ListItemText,
   Button,
   Hidden,
-  Link,
   Slide,
+  List,
+  ListItem,
 } from "@material-ui/core";
+
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   navBar: {},
   navbarGrid: {
     justifyContent: "space-between",
+    alignContent: "center",
   },
   navLink: {
     fontFamily: "Comfortaa ",
     color: theme.palette.secondary.main,
-    fontSize: "16px",
-    margin: theme.spacing(3),
+    fontSize: "20px",
+    fontWeight: "bold",
+    margin: "0px 8px",
     textTransform: "capitalize",
   },
   navContainer: {
+    display: "flex",
+    flexDirection: "row",
     alignItems: "center",
+  },
+  active: {
+    "&:hover": {
+      transform: "scale(1.1)",
+    },
+    backgroundColor: theme.palette.secondary.light,
+    borderRadius: "4px",
+    boxShadow: "8px 8px 10px grey",
+    color: "white",
+  },
+  listWrap: {
+    "&:hover": {
+      transform: "scale(1.1)",
+    },
+    textAlign: "center",
   },
 }));
 
@@ -42,7 +64,9 @@ const StyledButton = withStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
+  const [active, setActive] = useState(0);
   const [login, setLogin] = useState(false);
+  const preventDefault = (e) => e.preventDefault();
   return (
     <>
       <AppBar
@@ -50,53 +74,89 @@ export default function Navbar() {
         className={classes.navBar}
         elevation={0}
         color="primary"
-        style={{ height: "20%" }}
+        style={{ maxHeight: "10%" }}
       >
         <Toolbar>
           <Grid container className={classes.navbarGrid}>
             <Hidden smDown={true}>
-              <Grid item className={classes.navLink}>
-                <Link href="/">
+              <Grid item>
+                <NavLink to="/">
                   <img
                     src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
-                    style={{ height: "50px", maxWidth: "75px" }}
+                    style={{
+                      height: "75px",
+                      maxWidth: "100px",
+                      alignSelf: "center",
+                      padding: "0px",
+                      margin: "24px 24px 0px 24px",
+                    }}
                     alt=""
-                    sm={0}
                   ></img>
-                </Link>
+                </NavLink>
               </Grid>
             </Hidden>
 
             <Grid item>
-              <Box display="flex" className={classes.navContainer}>
-                <Link className={classes.navLink} href="/" underline="none">
-                  Home
-                </Link>
-                <Link className={classes.navLink} underline="none">
-                  About
-                </Link>
-                <Link className={classes.navLink} href="/live" underline="none">
-                  Live Trades
-                </Link>
-                <Link
-                  className={classes.navLink}
-                  href="/contact"
-                  underline="none"
+              <List className={classes.navContainer}>
+                <NavLink
+                  exact
+                  activeClassName={classes.active}
+                  to="/"
+                  style={{ textDecoration: "none" }}
                 >
-                  Contact
-                </Link>
-                <StyledButton
-                  variant="contained"
-                  className={classes.navLink}
-                  color="secondary"
-                  size="medium"
-                  onClick={(e) => {
-                    setLogin((prev) => !prev);
-                  }}
+                  <ListItem className={classes.listWrap}>
+                    <ListItemText className={classes.navLink} disableTypography>
+                      Home
+                    </ListItemText>
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  activeClassName={classes.active}
+                  to="/about"
+                  style={{ textDecoration: "none" }}
                 >
-                  Login
-                </StyledButton>
-              </Box>
+                  <ListItem className={classes.listWrap}>
+                    <ListItemText className={classes.navLink} disableTypography>
+                      About
+                    </ListItemText>
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  activeClassName={classes.active}
+                  to="/live"
+                  style={{ textDecoration: "none" }}
+                >
+                  <ListItem className={classes.listWrap}>
+                    <ListItemText className={classes.navLink} disableTypography>
+                      Trades
+                    </ListItemText>
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  activeClassName={classes.active}
+                  to="/contact"
+                  style={{ textDecoration: "none" }}
+                >
+                  <ListItem className={classes.listWrap}>
+                    <ListItemText className={classes.navLink} disableTypography>
+                      Contact
+                    </ListItemText>
+                  </ListItem>
+                </NavLink>
+                <ListItem>
+                  <StyledButton
+                    variant="contained"
+                    className={classes.navLink}
+                    color="secondary"
+                    size="medium"
+                    onClick={(e) => {
+                      setLogin((prev) => !prev);
+                    }}
+                  >
+                    Login
+                  </StyledButton>
+                </ListItem>
+              </List>
             </Grid>
           </Grid>
         </Toolbar>
