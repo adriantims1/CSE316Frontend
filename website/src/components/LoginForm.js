@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -7,8 +7,12 @@ export default function LoginForm() {
   return (
     <>
       <form>
-        <TextField label="Email" />
-        <TextField label="Password" />
+        <Grid item>
+          <TextField label="Email" />
+        </Grid>
+        <Grid item>
+          <TextField label="Password" />
+        </Grid>
       </form>
     </>
   );

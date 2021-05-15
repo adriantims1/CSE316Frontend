@@ -5,7 +5,7 @@ import {
   Button,
   withStyles,
   Box,
-  Link,
+  Grid,
 } from "@material-ui/core";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
@@ -44,6 +44,7 @@ function Login() {
   return (
     <>
       <Paper elevation={3} className={classes.root}>
+        <Grid></Grid>
         <Box display="flex" style={{ alignSelf: "center" }}>
           <Button
             onClick={(e) => {
@@ -62,7 +63,14 @@ function Login() {
             SignUp
           </Button>
         </Box>
-        {login ? <LoginForm /> : <SignupForm />}
+        <Grid container direction="column" justify="center" alignItems="center">
+          {login ? (
+            <LoginForm style={{ alignSelf: "center" }} />
+          ) : (
+            <SignupForm style={{ alignSelf: "center" }} />
+          )}
+        </Grid>
+
         <br />
         <StyledButton variant="contained">
           {login ? "Login" : "Signup"}

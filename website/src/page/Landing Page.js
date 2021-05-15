@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/NavBar";
 import {
-  Container,
+  Box,
   makeStyles,
   Grid,
   withStyles,
@@ -14,23 +14,11 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import FacebookIcon from "@material-ui/icons/Facebook";
 
 const styles = makeStyles((theme) => ({
-  bodyContainer: {
-    height: "80vh",
-    width: "100vw",
+  innerContainer: {
+    width: "95%",
     backgroundColor: theme.palette.primary.main,
-    alignItems: "inline",
-    display: "flex",
-  },
-  leftContainer: {
-    height: "100%",
-    width: "50%",
-  },
-  rightContainer: {
-    width: "50%",
-    zIndex: "-1",
-  },
-  leftItem: {
-    margin: "5%",
+    margin: "0px 2%",
+    boxSizing: "border-box",
   },
   creative: {
     color: "black",
@@ -65,69 +53,63 @@ const Landing = () => {
   return (
     <>
       <Navbar />
-      <Container className={classes.bodyContainer}>
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="baseline"
-          className={classes.leftContainer}
-        >
-          <Grid item classname={classes.leftItem}>
+
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        style={{ justifyContent: "space-between" }}
+        className={classes.innerContainer}
+      >
+        <Grid item justifyContent="flex-start">
+          <Box
+            display="flex"
+            style={{
+              flexDirection: "column",
+
+              alignItems: "flex-start",
+            }}
+          >
             <Typography variant="h3" className={classes.creative}>
               Creative
             </Typography>
-          </Grid>
-
-          <Grid item classname={classes.leftItem}>
             <Typography variant="h2" className={classes.solutions}>
               Solutions
             </Typography>
-          </Grid>
-          <br />
-          <Grid item classname={classes.leftItem}>
+            <br />
             <Typography variant="body1" className={classes.body}>
               Binary option predictor using machine learning
             </Typography>
-          </Grid>
-          <br />
-          <Grid item classname={classes.leftItem}>
+            <br />
             <StyledButton>Learn More</StyledButton>
-          </Grid>
-          <br />
-          <Grid item classname={classes.leftItem}>
-            <InstagramIcon
-              fontSize="large"
-              color="secondary"
-              style={{ margin: "20px 20px 20px 0px" }}
-            />
-            <TwitterIcon
-              fontSize="large"
-              color="secondary"
-              style={{ margin: "20px" }}
-            />
-            <FacebookIcon
-              fontSize="large"
-              color="secondary"
-              style={{ margin: "20px 0px 20px 20px" }}
-            />
-          </Grid>
+            <br />
+            <Box display="flex" style={{ flexDirection: "row" }}>
+              <InstagramIcon
+                fontSize="large"
+                color="secondary"
+                style={{ margin: "20px 20px 20px 0px" }}
+              />
+              <TwitterIcon
+                fontSize="large"
+                color="secondary"
+                style={{ margin: "20px" }}
+              />
+              <FacebookIcon
+                fontSize="large"
+                color="secondary"
+                style={{ margin: "20px 0px 20px 20px" }}
+              />
+            </Box>
+          </Box>
         </Grid>
-        <Grid
-          container
-          direction="column"
-          justify="flex-start"
-          alignItems="flex-end"
-        >
-          <Grid item>
-            <img
-              src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620962204/picture_pqypsw.svg"
-              style={{ height: "75%" }}
-              alt=""
-            ></img>
-          </Grid>
+        <Grid item>
+          <img
+            src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620962204/picture_pqypsw.svg"
+            style={{ height: "75%" }}
+            alt=""
+          ></img>
         </Grid>
-      </Container>
+      </Grid>
     </>
   );
 };
