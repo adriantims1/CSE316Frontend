@@ -21,6 +21,7 @@ const styles = makeStyles((theme) => ({
   },
   icons: {
     fontSize: "50px",
+    margin: "10%",
   },
 }));
 
