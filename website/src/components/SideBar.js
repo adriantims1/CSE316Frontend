@@ -52,7 +52,7 @@ export default function SideBar() {
       <Box
         display="flex"
         className={`${classes.sidebar} ${classes.sidebarContent}`}
-        style={{ height: "80%" }}
+        style={{ height: "70%" }}
       >
         <NavLink to="/dashboard" activeClassName={classes.active}>
           <IconButton
@@ -107,6 +107,8 @@ export default function SideBar() {
             />
           </IconButton>
         </NavLink>
+      </Box>
+      <Box>
         <IconButton color="secondary">
           <ExitToAppIcon style={{ fontSize: "50px", margin: "10%" }} />
         </IconButton>
