@@ -4,6 +4,9 @@ import Live from "./page/Live Trades";
 import Contact from "./page/Contact Page";
 import Dashboard from "./page/Dashboard";
 import Admin from "./page/Admin";
+import Payment from "./page/Payment";
+import Settings from "./page/Settings";
+import Profile from "./page/Profile";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
 
@@ -24,10 +27,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Switch>
-          <Route exact path="/admin" component={Admin} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/live" component={Live} />
-          <Route exact path="/contact" component={Contact} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/payment" component={Payment} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/live" component={Live} />
+          <Route path="/contact" component={Contact} />
           <Route exact path="/" component={Landing} />
           <Route path="*" exact={true}>
             <div>Not Found</div>

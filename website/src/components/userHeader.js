@@ -42,9 +42,10 @@ export default function userHeader(props) {
           <img
             src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
             style={{
-              height: "50px",
-              width: "50px",
+              height: "75px",
+              width: "75px",
               paddingRight: "16px",
+              margin: "5px 0",
             }}
           ></img>
         </NavLink>

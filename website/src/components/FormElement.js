@@ -14,12 +14,6 @@ import {
   Button,
 } from "@material-ui/core";
 const styles = makeStyles((theme) => ({
-  contentContainer: {
-    marginTop: "2%",
-    display: "flex",
-    width: "100%",
-    height: "80%",
-  },
   fontSeparator: {
     fontFamily: "Comfortaa",
     fontWeight: "bold",
@@ -168,7 +162,10 @@ export default function FormElement() {
               value={maxValue}
               onChange={handleMaxValue}
               style={{ width: "25%" }}
-              label="$"
+              label="Enter Amount"
+              InputProps={{
+                startAdornment: "$ ",
+              }}
             ></TextField>
           </Box>
         }
