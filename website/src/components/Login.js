@@ -79,12 +79,9 @@ function Login() {
         </Grid>
 
         <br />
-        <StyledButton variant="contained">
+        <StyledButton variant="contained" style={{ margin: "16px" }}>
           {login ? "Login" : "Signup"}
         </StyledButton>
-        <br />
-        <br />
-        <br />
       </Paper>
     </>
   );

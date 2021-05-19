@@ -12,15 +12,12 @@ import {
   CardContent,
 } from "@material-ui/core";
 import EqualizerOutlinedIcon from "@material-ui/icons/EqualizerOutlined";
+import UserHeader from "../components/userHeader";
 
 const styles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     width: "100vw",
-  },
-  sidebar: {
-    height: "100%",
-    width: "30%",
   },
   rightbar: {
     display: "flex",
@@ -33,16 +30,9 @@ const styles = makeStyles((theme) => ({
   rightContainer: {
     height: "95%",
     width: "95%",
-
     backgroundColor: theme.palette.primary.dark,
   },
-  header: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    boxSizing: "border-box",
-  },
+
   title: {
     fontFamily: "Comfortaa",
     fontWeight: "bold",
@@ -88,39 +78,7 @@ export default function Dashboard() {
         <Sidebar />
         <Grid item className={classes.rightbar}>
           <Paper className={classes.rightContainer}>
-            <Container className={classes.header}>
-              <Typography className={classes.title}>Dashboard</Typography>
-              <Box
-                display="flex"
-                style={{
-                  justifyContent: "space-between",
-
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
-                  style={{
-                    height: "50px",
-                    width: "50px",
-                    paddingRight: "16px",
-                  }}
-                ></img>
-                <Box
-                  display="flex"
-                  style={{
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                  }}
-                >
-                  <Typography className={classes.profileName}>
-                    William Alfonzo
-                  </Typography>
-                  <Typography color="secondary">Free Tier</Typography>
-                </Box>
-              </Box>
-            </Container>
+            <UserHeader page="Dashboard" />
             <Container className={classes.cardContainer}>
               <Card className={classes.card}>
                 <CardContent>
@@ -186,6 +144,10 @@ export default function Dashboard() {
                         height: "75px",
                         width: "75px",
                         left: "10",
+                        backgroundColor: "#B0D2E8",
+                        borderRadius: "50%",
+                        padding: "12px",
+                        boxSizing: "border-box",
                       }}
                       color="secondary"
                     />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles, Grid, Box, IconButton } from "@material-ui/core";
+import { makeStyles, Grid, Box, IconButton, Button } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import SecurityIcon from "@material-ui/icons/Security";
@@ -29,6 +29,9 @@ const styles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     borderRadius: "8px",
     boxSizing: "border-box",
+    "& $icons": {
+      color: "white",
+    },
   },
   iconActive: {
     color: "white",
@@ -37,7 +40,7 @@ const styles = makeStyles((theme) => ({
 
 export default function SideBar() {
   const classes = styles();
-  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <Grid item className={classes.sidebar}>
       <Box
@@ -55,62 +58,30 @@ export default function SideBar() {
         style={{ height: "70%" }}
       >
         <NavLink to="/dashboard" activeClassName={classes.active}>
-          <IconButton
-            onClick={(e) => {
-              setActiveIndex(0);
-            }}
-          >
-            <HomeIcon
-              className={`${classes.icons} ${
-                activeIndex === 0 ? classes.iconActive : null
-              }`}
-            />
+          <IconButton>
+            <HomeIcon className={classes.icons} />
           </IconButton>
         </NavLink>
 
         <NavLink to="/admin" activeClassName={classes.active}>
-          <IconButton
-            onClick={(e) => {
-              setActiveIndex(1);
-            }}
-          >
-            <SecurityIcon
-              className={`${classes.icons} ${
-                activeIndex === 1 ? classes.iconActive : null
-              }`}
-            />
+          <IconButton>
+            <SecurityIcon className={classes.icons} />
           </IconButton>
         </NavLink>
-        <NavLink to="/admin" activeClassName={classes.active}>
-          <IconButton
-            onClick={(e) => {
-              setActiveIndex(2);
-            }}
-          >
-            <PaymentIcon
-              className={`${classes.icons} ${
-                activeIndex === 2 ? classes.iconActive : null
-              }`}
-            />
+        <NavLink to="/payment" activeClassName={classes.active}>
+          <IconButton>
+            <PaymentIcon className={classes.icons} />
           </IconButton>
         </NavLink>
-        <NavLink to="/admin" activeClassName={classes.active}>
-          <IconButton
-            onClick={(e) => {
-              setActiveIndex(3);
-            }}
-          >
-            <SettingsIcon
-              className={`${classes.icons} ${
-                activeIndex === 3 ? classes.iconActive : null
-              }`}
-            />
+        <NavLink to="/settings" activeClassName={classes.active}>
+          <IconButton>
+            <SettingsIcon className={classes.icons} />
           </IconButton>
         </NavLink>
       </Box>
       <Box>
         <IconButton color="secondary">
-          <ExitToAppIcon style={{ fontSize: "50px", margin: "10%" }} />
+          <ExitToAppIcon style={{ fontSize: "50px" }} />
         </IconButton>
       </Box>
     </Grid>
