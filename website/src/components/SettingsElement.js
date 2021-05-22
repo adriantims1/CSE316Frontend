@@ -137,7 +137,7 @@ export default function PaymentElement() {
               <option value={1}>1 min</option>
               <option value={5}>5 min</option>
               <option value={10}>10 min</option>
-              <option value={10}>10 min</option>
+              <option value={30}>30 min</option>
             </NativeSelect>
           </Box>
         }

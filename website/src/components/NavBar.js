@@ -12,6 +12,7 @@ import {
   Slide,
   List,
   ListItem,
+  Backdrop,
 } from "@material-ui/core";
 
 import { NavLink } from "react-router-dom";
@@ -49,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(1.1)",
     },
     textAlign: "center",
+  },
+  Backdrop: {
+    zIndex: 2,
+    backgroundColor: "transparent",
   },
 }));
 
@@ -163,6 +168,13 @@ export default function Navbar() {
       </AppBar>
       <Slide direction="left" in={login}>
         <div>
+          <Backdrop
+            className={classes.Backdrop}
+            open={login}
+            onClick={(e) => {
+              setLogin(false);
+            }}
+          ></Backdrop>
           <Login />
         </div>
       </Slide>

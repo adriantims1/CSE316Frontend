@@ -12,6 +12,7 @@ import {
   CardContent,
 } from "@material-ui/core";
 import EqualizerOutlinedIcon from "@material-ui/icons/EqualizerOutlined";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import UserHeader from "../components/userHeader";
 
 const styles = makeStyles((theme) => ({
@@ -160,13 +161,34 @@ export default function Dashboard() {
                         marginLeft: "10%",
                       }}
                     >
-                      <Typography
-                        className={classes.fontBody}
-                        style={{ alignSelf: "flex-start", fontSize: "18px" }}
-                      >{`+2.50%`}</Typography>
+                      <Box display="flex">
+                        <ArrowUpwardIcon
+                          style={{
+                            color: "green",
+                            backgroundColor: "lightgreen",
+                            borderRadius: "50%",
+                            marginRight: "12px",
+                          }}
+                        />
+                        <Typography
+                          className={classes.fontBody}
+                          style={{
+                            alignSelf: "flex-start",
+                            fontSize: "18px",
+                            color: "green",
+                          }}
+                        >
+                          {`2.50%`}
+                        </Typography>
+                      </Box>
+
                       <br />
                       <Typography
-                        style={{ alignSelf: "flex-start", fontSize: "18px" }}
+                        style={{
+                          alignSelf: "flex-start",
+                          fontSize: "18px",
+                          color: "green",
+                        }}
                         className={classes.fontBody}
                       >
                         5.00 in profit
@@ -181,7 +203,14 @@ export default function Dashboard() {
                 Last 5 Transactions
               </Typography>
             </Container>
-            <Box style={{ height: "60%" }}>
+            <Box
+              display="flex"
+              style={{
+                height: "50%",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
               {["", "", "", "", ""].map((element) => (
                 <TransactionCard />
               ))}

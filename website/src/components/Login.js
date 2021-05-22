@@ -39,6 +39,7 @@ const StyledButton = withStyles((theme) => ({
     color: "white",
     width: "30%",
     alignSelf: "center",
+    zIndex: theme.zIndex.drawer + 2,
   },
   label: {
     textTransform: "capitalize",
@@ -49,41 +50,36 @@ function Login() {
   const [login, setLogin] = useState(true);
   const classes = styles();
   return (
-    <>
-      <Paper elevation={3} className={classes.root}>
-        <Grid></Grid>
-        <Box display="flex" style={{ alignSelf: "center" }}>
-          <LoginButton
-            onClick={(e) => {
-              e.preventDefault();
-              setLogin(true);
-            }}
-          >
-            Login
-          </LoginButton>
-          <LoginButton
-            onClick={(e) => {
-              e.preventDefault();
-              setLogin(false);
-            }}
-          >
-            SignUp
-          </LoginButton>
-        </Box>
-        <Grid container direction="column" justify="center" alignItems="center">
-          {login ? (
-            <LoginForm style={{ alignSelf: "center" }} />
-          ) : (
-            <SignupForm style={{ alignSelf: "center" }} />
-          )}
-        </Grid>
+    <Paper elevation={3} className={classes.root}>
+      <Grid></Grid>
+      <Box display="flex" style={{ alignSelf: "center" }}>
+        <LoginButton
+          onClick={(e) => {
+            e.preventDefault();
+            setLogin(true);
+          }}
+        >
+          Login
+        </LoginButton>
+        <LoginButton
+          onClick={(e) => {
+            e.preventDefault();
+            setLogin(false);
+          }}
+        >
+          SignUp
+        </LoginButton>
+      </Box>
+      <Grid container direction="column" justify="center" alignItems="center">
+        {login ? (
+          <LoginForm style={{ alignSelf: "center" }} />
+        ) : (
+          <SignupForm style={{ alignSelf: "center" }} />
+        )}
+      </Grid>
 
-        <br />
-        <StyledButton variant="contained" style={{ margin: "16px" }}>
-          {login ? "Login" : "Signup"}
-        </StyledButton>
-      </Paper>
-    </>
+      <br />
+    </Paper>
   );
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/NavBar";
 import {
   Grid,
@@ -8,7 +8,14 @@ import {
   Button,
   withStyles,
   TextField,
+  Snackbar,
 } from "@material-ui/core";
+
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const styles = makeStyles((theme) => ({
   bodyContainer: {
@@ -42,6 +49,17 @@ const StyledButton = withStyles((theme) => ({
 
 const Contact = () => {
   const classes = styles();
+  const [open, setOpen] = useState(false);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const onClick_send = (e) => {
+    setOpen(true);
+  };
   return (
     <>
       <Navbar />
@@ -82,10 +100,20 @@ const Contact = () => {
             />
           </Grid>
           <Grid item>
-            <StyledButton>Send</StyledButton>
+            <StyledButton onClick={onClick_send}>Send</StyledButton>
           </Grid>
         </Grid>
       </Container>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity="success">
+          Message send!
+        </Alert>
+      </Snackbar>
     </>
   );
 };

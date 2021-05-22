@@ -5,7 +5,6 @@ const styles = makeStyles((theme) => ({
   card: {
     width: "100%",
     background: theme.palette.primary.main,
-    marginBottom: "1.5%",
     boxShadow: "5px",
   },
 }));
