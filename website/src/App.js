@@ -2,6 +2,7 @@ import "./App.css";
 import Landing from "./page/Landing Page";
 import Live from "./page/Live Trades";
 import Contact from "./page/Contact Page";
+import About from "./page/About Page";
 import Dashboard from "./page/Dashboard";
 import Admin from "./page/Admin";
 import Payment from "./page/Payment";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/live" component={Live} />
           <Route path="/contact" component={Contact} />
+          <Route path="/about" component={About} />
           <Route exact path="/" component={Landing} />
           <Route path="*" exact={true}>
             <div>Not Found</div>

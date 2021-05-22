@@ -13,6 +13,23 @@ export const ContactUsInfoAPIMethod = (userInfo, success) => {
         .then(success);
 }
 
+export const signUpAPIInfo = (profile, success) => {
+    return fetch(`http://localhost:5000/api/profile/register`, {
+        ...defaultHeaders,
+        method: 'POST',
+        body: JSON.stringify(profile),
+    }).then(checkStatus)
+        .then(success);
+}
+
+export const LoginAPIMethod = (profile, success) => {
+    return fetch(`http://localhost:5000/api/profile/login`, {
+        ...defaultHeaders,
+        method: 'POST',
+        body: JSON.stringify(profile),
+    }).then(checkStatus)
+        .then(success);
+}
 
 async function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
