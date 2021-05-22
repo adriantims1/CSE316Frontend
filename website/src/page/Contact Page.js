@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
+// >>>>>>> fb55bab (api added for contactUs page message relay)
 import Navbar from "../components/NavBar";
+import { ContactUsInfoAPIMethod } from "../api/generalClient";
+
 import {
   Grid,
   Container,
@@ -48,6 +51,39 @@ const StyledButton = withStyles((theme) => ({
 }))(Button);
 
 const Contact = () => {
+  const [name, setName] = useState(" ");
+  const [email, setEmail] = useState(" ");
+  const [message, setMessage] = useState(" ");
+
+  const onChange_name = (e) => {
+    e.preventDefault();
+    setName(e.target.value);
+  }
+
+  const onChange_email = (e) => {
+    e.preventDefault();
+    setEmail(e.target.value);
+  }
+
+  const onChange_message = (e) => {
+    e.preventDefault();
+    setMessage(e.target.value);
+  }
+
+  const sendContactInfo = (e) => {
+    e.preventDefault();
+    console.log([name, email, message]);
+
+    try {
+      e.preventDefault();
+      ContactUsInfoAPIMethod({ name: name, email: email, message: message });
+      onClick_send(e)
+    }
+    catch (err) {
+      alert(err.response);
+    }
+  }
+
   const classes = styles();
   const [open, setOpen] = useState(false);
   const handleClose = (event, reason) => {
@@ -80,6 +116,7 @@ const Contact = () => {
               placeholder="John Doe"
               label="Name"
               fullWidth
+              onChange={onChange_name}
               className={classes.input}
             />
 
@@ -87,6 +124,7 @@ const Contact = () => {
               placeholder="johndoe@email.com"
               label="Email"
               fullWidth
+              onChange={onChange_email}
               className={classes.input}
             />
 
@@ -96,11 +134,12 @@ const Contact = () => {
               fullWidth
               multiline
               rows={5}
+              onChange={onChange_message}
               className={classes.input}
             />
           </Grid>
           <Grid item>
-            <StyledButton onClick={onClick_send}>Send</StyledButton>
+            <StyledButton onClick={sendContactInfo}>Send</StyledButton>
           </Grid>
         </Grid>
       </Container>
