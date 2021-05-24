@@ -6,6 +6,8 @@ import SecurityIcon from "@material-ui/icons/Security";
 import PaymentIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { useHistory } from "react-router-dom";
+import { LogoutAPIMethod } from "../api/generalClient";
 const styles = makeStyles((theme) => ({
   sidebar: {
     height: "100%",
@@ -40,7 +42,11 @@ const styles = makeStyles((theme) => ({
 
 export default function SideBar() {
   const classes = styles();
-
+  const history = useHistory();
+  const onClick_logout = () => {
+    LogoutAPIMethod();
+    history.push("/");
+  };
   return (
     <Grid item className={classes.sidebar}>
       <Box
@@ -80,7 +86,7 @@ export default function SideBar() {
         </NavLink>
       </Box>
       <Box>
-        <IconButton color="secondary">
+        <IconButton color="secondary" onClick={onClick_logout}>
           <ExitToAppIcon style={{ fontSize: "50px" }} />
         </IconButton>
       </Box>

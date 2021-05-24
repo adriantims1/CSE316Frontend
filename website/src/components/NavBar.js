@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CheckOnlineAPIMethod } from "../api/generalClient";
 import Login from "./Login";
 import {
   AppBar,
@@ -14,8 +15,7 @@ import {
   ListItem,
   Backdrop,
 } from "@material-ui/core";
-
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   navBar: {},
@@ -71,7 +71,12 @@ export default function Navbar() {
   const classes = useStyles();
   const [active, setActive] = useState(0);
   const [login, setLogin] = useState(false);
-  const preventDefault = (e) => e.preventDefault();
+  const history = useHistory();
+  const checkOnlineProfile = async () => {
+    const sessId = await CheckOnlineAPIMethod();
+    console.log(sessId);
+    return sessId.data;
+  };
   return (
     <>
       <AppBar
@@ -154,7 +159,14 @@ export default function Navbar() {
                     className={classes.navLink}
                     color="secondary"
                     size="medium"
-                    onClick={(e) => {
+                    onClick={async (e) => {
+                      const sessId = await CheckOnlineAPIMethod();
+                      console.log(sessId.data);
+                      /*if (sessId.data !== undefined) {
+                        history.push("/dashboard");
+                      } else {
+                        setLogin((prev) => !prev);
+                      }*/
                       setLogin((prev) => !prev);
                     }}
                   >
