@@ -25,7 +25,7 @@ export const signUpAPIInfo = (profile, success) => {
 };
 
 export const LoginAPIMethod = (profile, success) => {
-  return fetch(`http://localhost:5000/api/profile/login`, {
+  return fetch(`/api/profile/login`, {
     ...defaultHeaders,
     method: "POST",
     body: JSON.stringify(profile),
@@ -33,21 +33,22 @@ export const LoginAPIMethod = (profile, success) => {
     .then(checkStatus)
     .then(success);
 };
-export const LogoutAPIMethod = (profile, success) => {
-  return fetch(`http://localhost:5000/api/profile/logout`, {
+export const LogoutAPIMethod = (success) => {
+  return fetch(`/api/profile/logout`, {
     ...defaultHeaders,
     method: "POST",
-    body: JSON.stringify(profile),
+    body: JSON.stringify({}),
   })
     .then(checkStatus)
     .then(success);
 };
 export const CheckOnlineAPIMethod = (profile, success) => {
-  return fetch(`http://localhost:5000/api/profile/checkonline`, {
+  return fetch(`/api/profile/checkonline`, {
     ...defaultHeaders,
     method: "GET",
   })
     .then(checkStatus)
+    .then(parseJSON)
     .then(success);
 };
 

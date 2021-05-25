@@ -74,150 +74,142 @@ const styles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = styles();
   return (
-    <div>
-      <Grid container alignItems="center" className={classes.root}>
-        <Sidebar />
-        <Grid item className={classes.rightbar}>
-          <Paper className={classes.rightContainer}>
-            <UserHeader page="Dashboard" />
-            <Container className={classes.cardContainer}>
-              <Card className={classes.card}>
-                <CardContent>
-                  <Box
-                    display="flex"
-                    style={{ justifyContent: "space-between" }}
+    <Grid container alignItems="center" className={classes.root}>
+      <Sidebar />
+      <Grid item className={classes.rightbar}>
+        <Paper className={classes.rightContainer}>
+          <UserHeader page="Dashboard" />
+          <Container className={classes.cardContainer}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Box display="flex" style={{ justifyContent: "space-between" }}>
+                  <Typography className={classes.fontBody} color="primary">
+                    My Balance
+                  </Typography>
+                  <Typography className={classes.fontBody} color="primary">
+                    Demo
+                  </Typography>
+                </Box>
+                <Box
+                  display="flex"
+                  style={{
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-end",
+                    height: "70px",
+                  }}
+                >
+                  <Typography
+                    className={classes.fontBody}
+                    style={{ fontSize: "32px", fontWeight: "bold" }}
+                    color="primary"
                   >
-                    <Typography className={classes.fontBody} color="primary">
-                      My Balance
-                    </Typography>
-                    <Typography className={classes.fontBody} color="primary">
-                      Withdraw
-                    </Typography>
-                  </Box>
+                    {`USD 5,600.00`}
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
+            <Card className={classes.card} style={{ backgroundColor: "white" }}>
+              <CardContent
+                className={classes.fontBody}
+                style={{ alignItems: "space-between" }}
+              >
+                <Box display="flex">
+                  <Typography
+                    className={classes.fontBody}
+                    color="secondary"
+                    style={{ justifySelf: "flex-start" }}
+                  >
+                    Last 24 Hours
+                  </Typography>
+                </Box>
+                <br />
+
+                <Box
+                  display="flex"
+                  style={{ justifyContent: "space-even" }}
+                  direction="row"
+                >
+                  <EqualizerOutlinedIcon
+                    style={{
+                      zIndex: "2",
+                      alignSelf: "center",
+                      justifySelf: "center",
+                      height: "75px",
+                      width: "75px",
+                      left: "10",
+                      backgroundColor: "#B0D2E8",
+                      borderRadius: "50%",
+                      padding: "12px",
+                      boxSizing: "border-box",
+                    }}
+                    color="secondary"
+                  />
                   <Box
                     display="flex"
                     style={{
                       flexDirection: "column",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-end",
-                      height: "70px",
+                      justifyItems: "flex-start",
+                      alignItems: "baselines",
+                      marginLeft: "10%",
                     }}
                   >
-                    <Typography
-                      className={classes.fontBody}
-                      style={{ fontSize: "32px", fontWeight: "bold" }}
-                      color="primary"
-                    >
-                      {`USD 5,600.00`}
-                    </Typography>
-                  </Box>
-                </CardContent>
-              </Card>
-              <Card
-                className={classes.card}
-                style={{ backgroundColor: "white" }}
-              >
-                <CardContent
-                  className={classes.fontBody}
-                  style={{ alignItems: "space-between" }}
-                >
-                  <Box display="flex">
-                    <Typography
-                      className={classes.fontBody}
-                      color="secondary"
-                      style={{ justifySelf: "flex-start" }}
-                    >
-                      Last 24 Hours
-                    </Typography>
-                  </Box>
-                  <br />
-
-                  <Box
-                    display="flex"
-                    style={{ justifyContent: "space-even" }}
-                    direction="row"
-                  >
-                    <EqualizerOutlinedIcon
-                      style={{
-                        zIndex: "2",
-                        alignSelf: "center",
-                        justifySelf: "center",
-                        height: "75px",
-                        width: "75px",
-                        left: "10",
-                        backgroundColor: "#B0D2E8",
-                        borderRadius: "50%",
-                        padding: "12px",
-                        boxSizing: "border-box",
-                      }}
-                      color="secondary"
-                    />
-                    <Box
-                      display="flex"
-                      style={{
-                        flexDirection: "column",
-                        justifyItems: "flex-start",
-                        alignItems: "baselines",
-                        marginLeft: "10%",
-                      }}
-                    >
-                      <Box display="flex">
-                        <ArrowUpwardIcon
-                          style={{
-                            color: "green",
-                            backgroundColor: "lightgreen",
-                            borderRadius: "50%",
-                            marginRight: "12px",
-                          }}
-                        />
-                        <Typography
-                          className={classes.fontBody}
-                          style={{
-                            alignSelf: "flex-start",
-                            fontSize: "18px",
-                            color: "green",
-                          }}
-                        >
-                          {`2.50%`}
-                        </Typography>
-                      </Box>
-
-                      <br />
+                    <Box display="flex">
+                      <ArrowUpwardIcon
+                        style={{
+                          color: "green",
+                          backgroundColor: "lightgreen",
+                          borderRadius: "50%",
+                          marginRight: "12px",
+                        }}
+                      />
                       <Typography
+                        className={classes.fontBody}
                         style={{
                           alignSelf: "flex-start",
                           fontSize: "18px",
                           color: "green",
                         }}
-                        className={classes.fontBody}
                       >
-                        5.00 in profit
+                        {`2.50%`}
                       </Typography>
                     </Box>
+
+                    <br />
+                    <Typography
+                      style={{
+                        alignSelf: "flex-start",
+                        fontSize: "18px",
+                        color: "green",
+                      }}
+                      className={classes.fontBody}
+                    >
+                      5.00 in profit
+                    </Typography>
                   </Box>
-                </CardContent>
-              </Card>
-            </Container>
-            <Container display="flex" className={classes.cardContainer}>
-              <Typography className={classes.fontSeparator}>
-                Last 5 Transactions
-              </Typography>
-            </Container>
-            <Box
-              display="flex"
-              style={{
-                height: "50%",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              {["", "", "", "", ""].map((element) => (
-                <TransactionCard />
-              ))}
-            </Box>
-          </Paper>
-        </Grid>
+                </Box>
+              </CardContent>
+            </Card>
+          </Container>
+          <Container display="flex" className={classes.cardContainer}>
+            <Typography className={classes.fontSeparator}>
+              Last 5 Transactions
+            </Typography>
+          </Container>
+          <Box
+            display="flex"
+            style={{
+              height: "50%",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            {["", "", "", "", ""].map((element) => (
+              <TransactionCard />
+            ))}
+          </Box>
+        </Paper>
       </Grid>
-    </div>
+    </Grid>
   );
 }

@@ -162,12 +162,11 @@ export default function Navbar() {
                     onClick={async (e) => {
                       const sessId = await CheckOnlineAPIMethod();
                       console.log(sessId.data);
-                      /*if (sessId.data !== undefined) {
+                      if (sessId.data !== undefined) {
                         history.push("/dashboard");
                       } else {
                         setLogin((prev) => !prev);
-                      }*/
-                      setLogin((prev) => !prev);
+                      }
                     }}
                   >
                     Login
