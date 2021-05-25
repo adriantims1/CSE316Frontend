@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Typography, Box, makeStyles } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import { getprofileurlAPIMethod } from "../../api/profileClient";
 
 const styles = makeStyles((theme) => ({
   profileName: {
@@ -26,7 +27,25 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function userHeader(props) {
-  const classes = styles();
+    const [name, set_name] = useState('John Doe');
+    const [accountType, set_accountType] = useState('Free Tier');
+    const [profile_url, setProfile_url] = useState("https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png");
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            await getprofileurlAPIMethod((response) => {
+                set_name(response.name);
+                set_accountType(response.accountType);
+                setProfile_url(response.profile_url);
+            });
+
+        }
+        fetchProfile();
+
+
+    }, []);
+
+    const classes = styles();
   return (
     <Container className={classes.header}>
       <Typography className={classes.title}>{`${props.page}`}</Typography>
@@ -40,7 +59,7 @@ export default function userHeader(props) {
       >
         <NavLink to="/profile">
           <img
-            src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
+            src = {profile_url}
             style={{
               height: "75px",
               width: "75px",
@@ -59,9 +78,9 @@ export default function userHeader(props) {
           }}
         >
           <Typography className={classes.profileName}>
-            William Alfonzo
+              {name}
           </Typography>
-          <Typography color="secondary">Free Tier</Typography>
+          <Typography color="secondary">{accountType}</Typography>
         </Box>
       </Box>
     </Container>

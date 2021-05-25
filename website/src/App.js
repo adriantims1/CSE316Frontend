@@ -10,6 +10,7 @@ import Settings from "./page/Settings";
 import Profile from "./page/Profile";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
+import {CheckOnlineAPIMethod} from "./api/generalClient"
 
 const theme = createMuiTheme({
   palette: {
@@ -24,6 +25,16 @@ const theme = createMuiTheme({
   },
 });
 function App() {
+  const checkOnlineProfile = async () => {
+    const sessId = await CheckOnlineAPIMethod();
+    console.log(sessId.data);
+    if(sessId.data === undefined) {
+      return Landing;
+    }
+    else{
+      return Dashboard;
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -32,7 +43,9 @@ function App() {
           <Route path="/settings" component={Settings} />
           <Route path="/payment" component={Payment} />
           <Route path="/admin" component={Admin} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" component={checkOnlineProfile()}/>
+
+
           <Route path="/live" component={Live} />
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={About} />
