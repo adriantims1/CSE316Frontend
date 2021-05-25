@@ -36,9 +36,9 @@ export default function UserHeader(props) {
   useEffect(() => {
     const fetchProfile = async () => {
       await getprofileurlAPIMethod((response) => {
-        set_name(response.name);
-        set_accountType(response.accountType);
-        setProfile_url(response.profile_url);
+        set_name(response.data.name);
+        set_accountType(response.data.accountType);
+        setProfile_url(response.data.profile_url);
       });
     };
     fetchProfile();
