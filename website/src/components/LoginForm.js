@@ -40,6 +40,7 @@ export default function LoginForm() {
       LoginAPIMethod({ email: email, password: pass }, (res) => {
         console.log(res);
       });
+      localStorage.setItem("log", true);
       history.push(`/dashboard`);
     } catch (err) {
       alert(err.response);

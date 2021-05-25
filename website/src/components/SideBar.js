@@ -45,6 +45,7 @@ export default function SideBar() {
   const history = useHistory();
   const onClick_logout = () => {
     LogoutAPIMethod();
+    localStorage.setItem("log", false);
     history.push("/");
   };
   return (
