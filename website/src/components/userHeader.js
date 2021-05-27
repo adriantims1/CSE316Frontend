@@ -32,16 +32,20 @@ export default function UserHeader(props) {
   const [profile_url, setProfile_url] = useState(
     "https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
   );
-
+  const [refetch, setRefetch] = useState(true);
   useEffect(() => {
-    getprofileurlAPIMethod((response) => {
-      const name = response.data.data.name;
+    if (refetch) {
+      console.log("fetch");
+      getprofileurlAPIMethod((response) => {
+        const name = response.data.data.name;
 
-      set_name(name.toUpperCase());
-      set_accountType(response.data.data.accountType);
-      setProfile_url(response.data.data.profile_url);
-    });
-  }, [props.profile]);
+        set_name(name.toUpperCase());
+        set_accountType(response.data.data.accountType);
+        setProfile_url(response.data.data.profile_url);
+      });
+      setRefetch(false);
+    }
+  }, []);
 
   const classes = styles();
   return (

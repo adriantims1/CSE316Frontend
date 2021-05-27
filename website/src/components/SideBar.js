@@ -54,10 +54,18 @@ export default function SideBar() {
         display="flex"
         className={`${classes.sidebar} ${classes.sidebarContent}`}
       >
-        <img
-          src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
-          style={{ height: "75px", width: "100px" }}
-        ></img>
+        <a
+          href=""
+          onClick={(e) => {
+            e.preventDefault();
+            history.push("/");
+          }}
+        >
+          <img
+            src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
+            style={{ height: "75px", width: "100px" }}
+          ></img>
+        </a>
       </Box>
       <Box
         display="flex"
