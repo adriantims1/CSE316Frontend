@@ -5,11 +5,9 @@ import { useHistory } from "react-router-dom";
 export default function CheckOnline(props) {
   const history = useHistory();
   const [state, setState] = useState(false);
-  useEffect(() => {
-    //const sessId = await CheckOnlineAPIMethod();
-    //console.log(localStorage.getItem("log"));
-    //console.log(sessId.data);
-    if (localStorage.getItem("log") !== "false") {
+  useEffect(async () => {
+    const sess = await CheckOnlineAPIMethod();
+    if (sess.data) {
       setState(true);
     } else {
       console.log("false");

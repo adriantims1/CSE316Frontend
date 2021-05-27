@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/SideBar";
 import { Grid, Paper, makeStyles, Container } from "@material-ui/core";
 import UserHeader from "../components/userHeader";
@@ -28,15 +28,16 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Profile() {
   const classes = styles();
+  const [profile, setProfile] = useState(false);
   return (
     <div>
       <Grid container alignItems="center" className={classes.root}>
         <Sidebar />
         <Grid item className={classes.rightbar}>
           <Paper className={classes.rightContainer}>
-            <UserHeader page="Profile" />
+            <UserHeader page="Profile" profile={profile} />
             <Container className={classes.contentContainer}>
               <Paper style={{ height: "100%", width: "100%" }}>
                 <Container
@@ -50,7 +51,7 @@ export default function Dashboard() {
                     justifyContent: "space-between",
                   }}
                 >
-                  <ProfileElement />
+                  <ProfileElement setProfile={setProfile} profile={profile} />
                 </Container>
               </Paper>
             </Container>

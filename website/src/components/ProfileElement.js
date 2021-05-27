@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   makeStyles,
   withStyles,
@@ -7,7 +7,17 @@ import {
   Box,
   Typography,
   Button,
+  Snackbar,
 } from "@material-ui/core";
+
+import { Alert } from "@material-ui/lab";
+import {
+  uploadImageToCloudinaryAPIMethod,
+  changeProfileAPIMethod,
+  changePasswordAPIMethod,
+  checkPasswordAPIMethod,
+  getprofileurlAPIMethod,
+} from "../api/profileClient";
 
 const styles = makeStyles((theme) => ({
   fontSeparator: {
@@ -48,18 +58,27 @@ const StyledButton = withStyles((theme) => ({
     textTransform: "capitalize",
   },
 }))(Button);
-export default function PaymentElement() {
+export default function ProfileElement(props) {
   const classes = styles();
   const [picture, setPicture] = useState(
     "https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
   );
+  const [success, setSuccess] = useState("success");
+  const [open, setOpen] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState();
   const [email, setEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const handlePicture = (e) => {
-    setPicture((prev) => !prev);
-  };
+  useEffect(() => {
+    console.log("testing123");
+    getprofileurlAPIMethod((res) => {
+      console.log(res.data.data.profile_url);
+      setPicture(res.data.data.profile_url);
+    });
+  }, [props.profile]);
+
+  var pictureRef = useRef(null);
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -72,6 +91,74 @@ export default function PaymentElement() {
   const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
   };
+
+  const onClickSave = async (e) => {
+    try {
+      const currPassword = await checkPasswordAPIMethod({
+        password: oldPassword,
+      });
+      if (!currPassword.data.success) {
+        setSuccess("warning");
+        setOpen(true);
+        setSnackBarMessage("Wrong old password");
+        return;
+      }
+      if (confirmPassword !== newPassword) {
+        setSuccess("warning");
+        setOpen(true);
+        setSnackBarMessage("Confirm your password");
+        return;
+      }
+      if (email) {
+        changeProfileAPIMethod({
+          email: email,
+          profile_url: picture,
+        });
+      } else {
+        changeProfileAPIMethod({
+          profile_url: picture,
+        });
+      }
+
+      if (newPassword)
+        changePasswordAPIMethod({
+          password: newPassword,
+        });
+      props.setProfile((prev) => !prev);
+      setSuccess("success");
+      setOpen(true);
+      setSnackBarMessage("Profile Updated");
+    } catch (err) {
+      setSuccess("error");
+      setOpen(true);
+      setSnackBarMessage("Fail to Update");
+    }
+  };
+
+  const handleSnackbarClose = (e) => {
+    setOpen(false);
+  };
+
+  const handlePhotoChange = (e) => {
+    const selectedFile = e.target.files[0];
+    const t = selectedFile.type.split("/").pop().toLowerCase();
+    if (
+      t !== "jpg" &&
+      t !== "jpeg" &&
+      t !== "png" &&
+      t !== "bmp" &&
+      t !== "gif"
+    ) {
+      alert("Enter valid file");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("upload_preset", "ckgxxhz4");
+    formData.append("file", selectedFile);
+    uploadImageToCloudinaryAPIMethod(formData, (res) => {
+      setPicture(res.url);
+    });
+  };
   return (
     <>
       <FormControlLabel
@@ -80,15 +167,30 @@ export default function PaymentElement() {
           <Box display="flex" className={classes.boxContainer}>
             <img
               src={picture}
-              style={{ height: "75px", width: "75px", paddingRight: "16px" }}
+              style={{
+                height: "75px",
+                width: "75px",
+                marginRight: "24px",
+                borderRadius: "50%",
+              }}
             ></img>
             <input
               type="file"
               name="image"
               accept="image/*"
               style={{ display: "none" }}
+              onChange={handlePhotoChange}
+              ref={(input) => {
+                pictureRef = input;
+              }}
             ></input>
-            <StyledButton>Upload photo</StyledButton>
+            <StyledButton
+              onClick={() => {
+                pictureRef.click();
+              }}
+            >
+              Upload photo
+            </StyledButton>
           </Box>
         }
         label={
@@ -126,6 +228,7 @@ export default function PaymentElement() {
               value={oldPassword}
               onChange={handleOldPassword}
               label="Enter Old Password: "
+              type="password"
             />
           </Box>
         }
@@ -145,6 +248,7 @@ export default function PaymentElement() {
               value={newPassword}
               onChange={handleNewPassword}
               label="Enter New Password: "
+              type="password"
             />
           </Box>
         }
@@ -164,6 +268,7 @@ export default function PaymentElement() {
               value={confirmPassword}
               onChange={handleConfirmPassword}
               label="Confirm password "
+              type="password"
             />
           </Box>
         }
@@ -175,10 +280,24 @@ export default function PaymentElement() {
         labelPlacement="start"
       />
       <FormControlLabel
-        control={<StyledButton variant="contained">Save</StyledButton>}
+        control={
+          <StyledButton variant="contained" onClick={onClickSave}>
+            Save
+          </StyledButton>
+        }
         label={<Typography className={classes.fontSeparator}></Typography>}
         style={{ marginBottom: "16px" }}
       ></FormControlLabel>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert onClose={handleSnackbarClose} severity={`${success}`}>
+          {snackBarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

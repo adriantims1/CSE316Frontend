@@ -1,3 +1,4 @@
+import axios from "axios";
 const defaultHeaders = {
   headers: {
     "Content-Type": "application/json; charset=UTF-8",
@@ -14,25 +15,65 @@ export const GetProfileDataAPIMethod = (profile, success) => {
 };
 
 export const uploadImageToCloudinaryAPIMethod = (formData, success) => {
-  const cloudName = 'nilson01' // Cloudinary account
+  //const cloudName = "nilson01"; // Cloudinary account
+  const cloudName = "dtkgfy2wk";
   return fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
     // We do NOT want to set the default headers – the formData will automatically set the
     // headers to tell the server of the data type (which is different than the JSON
     // standard all the other API calls have been sending.
-    method: 'POST',
+    method: "POST",
     body: formData,
-  }).then(checkStatus)
-      .then(parseJSON)
-      .then(success);
-}
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(success);
+};
 
 export const getprofileurlAPIMethod = (success) => {
-  return fetch(`http://localhost:5000/api/profile/profileHeader`, {
+  return axios
+    .get("http://localhost:5000/api/profile/profileHeader", {
+      withCredentials: true,
+    })
+    .then(checkStatus)
+    .then(success);
+};
+
+export const changeProfileAPIMethod = (data, success) => {
+  return axios
+    .post("http://localhost:5000/api/profile/settings", data, {
+      withCredentials: true,
+    })
+    .then(checkStatus)
+
+    .then(success);
+};
+
+export const changePasswordAPIMethod = (data, success) => {
+  return axios
+    .post("http://localhost:5000/api/profile/changePassword", data, {
+      withCredentials: true,
+    })
+    .then(checkStatus)
+    .then(success);
+};
+export const checkPasswordAPIMethod = (data, success) => {
+  return axios
+    .post("http://localhost:5000/api/profile/checkPassword", data, {
+      withCredentials: true,
+    })
+    .then(checkStatus)
+
+    .then(success);
+  /*return fetch(`http://localhost:5000/api/profile/checkPassword`, {
     ...defaultHeaders,
-  }).then(checkStatus)
-      .then(parseJSON)
-      .then(success);
-}
+    method: "POST",
+    body: data,
+    credentials: "include",
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(success);*/
+};
 
 async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {

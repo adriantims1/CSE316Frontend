@@ -46,6 +46,7 @@ export const CheckOnlineAPIMethod = (profile, success) => {
   return fetch(`/api/profile/checkonline`, {
     ...defaultHeaders,
     method: "GET",
+    credentials: "include",
   })
     .then(checkStatus)
     .then(parseJSON)

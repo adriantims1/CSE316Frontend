@@ -72,11 +72,6 @@ export default function Navbar() {
   const [active, setActive] = useState(0);
   const [login, setLogin] = useState(false);
   const history = useHistory();
-  const checkOnlineProfile = async () => {
-    const sessId = await CheckOnlineAPIMethod();
-    console.log(sessId);
-    return sessId.data;
-  };
   return (
     <>
       <AppBar

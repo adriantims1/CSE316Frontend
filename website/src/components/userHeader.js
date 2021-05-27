@@ -27,22 +27,21 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function UserHeader(props) {
-  const [name, set_name] = useState("John Doe");
-  const [accountType, set_accountType] = useState("Free Tier");
+  const [name, set_name] = useState("");
+  const [accountType, set_accountType] = useState("");
   const [profile_url, setProfile_url] = useState(
     "https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
   );
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      await getprofileurlAPIMethod((response) => {
-        set_name(response.data.name);
-        set_accountType(response.data.accountType);
-        setProfile_url(response.data.profile_url);
-      });
-    };
-    fetchProfile();
-  }, []);
+    getprofileurlAPIMethod((response) => {
+      const name = response.data.data.name;
+
+      set_name(name.toUpperCase());
+      set_accountType(response.data.data.accountType);
+      setProfile_url(response.data.data.profile_url);
+    });
+  }, [props.profile]);
 
   const classes = styles();
   return (
@@ -62,8 +61,8 @@ export default function UserHeader(props) {
             style={{
               height: "75px",
               width: "75px",
-              paddingRight: "16px",
-              margin: "5px 0",
+              margin: "8px 24px 8px 0",
+              borderRadius: "50%",
             }}
           ></img>
         </NavLink>
