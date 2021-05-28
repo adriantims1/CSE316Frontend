@@ -7,7 +7,10 @@ export default function CheckOnline(props) {
   const [state, setState] = useState(false);
   useEffect(async () => {
     const sess = await CheckOnlineAPIMethod();
-    if (sess.data) {
+    if (
+      sess.data &&
+      (!props.isAdminRoute || JSON.parse(localStorage.getItem("isAdmin")))
+    ) {
       setState(true);
     } else {
       console.log("false");

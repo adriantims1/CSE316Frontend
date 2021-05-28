@@ -60,23 +60,17 @@ const StyledButton = withStyles((theme) => ({
 }))(Button);
 export default function ProfileElement(props) {
   const classes = styles();
-  const [picture, setPicture] = useState(
-    "https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
-  );
+  const [picture, setPicture] = useState(localStorage.getItem("profile_url"));
   const [success, setSuccess] = useState("success");
   const [open, setOpen] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(localStorage.getItem("email"));
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   useEffect(() => {
-    console.log("testing123");
-    getprofileurlAPIMethod((res) => {
-      console.log(res.data.data.profile_url);
-      setPicture(res.data.data.profile_url);
-    });
-  }, [props.profile]);
+    console.log(localStorage.getItem("email"));
+  }, []);
 
   var pictureRef = useRef(null);
   const handleEmail = (e) => {
@@ -124,7 +118,7 @@ export default function ProfileElement(props) {
         changePasswordAPIMethod({
           password: newPassword,
         });
-      props.setProfile((prev) => !prev);
+      localStorage.setItem("profile_url", picture);
       setSuccess("success");
       setOpen(true);
       setSnackBarMessage("Profile Updated");

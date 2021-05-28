@@ -1,3 +1,4 @@
+import axios from "axios";
 const defaultHeaders = {
   headers: {
     "Content-Type": "application/json; charset=UTF-8",
@@ -34,11 +35,14 @@ export const LoginAPIMethod = (profile, success) => {
     .then(success);
 };
 export const LogoutAPIMethod = (success) => {
-  return fetch(`/api/profile/logout`, {
-    ...defaultHeaders,
-    method: "POST",
-    body: JSON.stringify({}),
-  })
+  return axios
+    .post(
+      `/api/profile/logout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    )
     .then(checkStatus)
     .then(success);
 };

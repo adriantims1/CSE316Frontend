@@ -27,25 +27,17 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function UserHeader(props) {
-  const [name, set_name] = useState("");
-  const [accountType, set_accountType] = useState("");
-  const [profile_url, setProfile_url] = useState(
-    "https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620202579/vippng.com-empty-circle-png-4161690_reukek.png"
+  const [name, set_name] = useState(localStorage.getItem("name").toUpperCase());
+  const [accountType, set_accountType] = useState(
+    localStorage.getItem("accountType")
   );
-  const [refetch, setRefetch] = useState(true);
-  useEffect(() => {
-    if (refetch) {
-      console.log("fetch");
-      getprofileurlAPIMethod((response) => {
-        const name = response.data.data.name;
+  const [profile_url, setProfile_url] = useState(
+    localStorage.getItem("profile_url")
+  );
 
-        set_name(name.toUpperCase());
-        set_accountType(response.data.data.accountType);
-        setProfile_url(response.data.data.profile_url);
-      });
-      setRefetch(false);
-    }
-  }, []);
+  useEffect(() => {
+    setProfile_url(localStorage.getItem("profile_url"));
+  }, [localStorage.getItem("profile_url")]);
 
   const classes = styles();
   return (

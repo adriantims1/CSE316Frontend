@@ -36,7 +36,7 @@ export default function Dashboard() {
         <Sidebar />
         <Grid item className={classes.rightbar}>
           <Paper className={classes.rightContainer}>
-            <UserHeader page="Admin" />
+            <UserHeader page="Robot Settings" />
             <Container className={classes.contentContainer}>
               <Paper style={{ height: "100%", width: "100%" }}>
                 <Container

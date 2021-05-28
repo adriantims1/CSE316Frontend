@@ -30,14 +30,14 @@ const styles = makeStyles((theme) => ({
 
 export default function Profile() {
   const classes = styles();
-  const [profile, setProfile] = useState(false);
+
   return (
     <div>
       <Grid container alignItems="center" className={classes.root}>
         <Sidebar />
         <Grid item className={classes.rightbar}>
           <Paper className={classes.rightContainer}>
-            <UserHeader page="Profile" profile={profile} />
+            <UserHeader page="Profile" />
             <Container className={classes.contentContainer}>
               <Paper style={{ height: "100%", width: "100%" }}>
                 <Container
@@ -51,7 +51,7 @@ export default function Profile() {
                     justifyContent: "space-between",
                   }}
                 >
-                  <ProfileElement setProfile={setProfile} profile={profile} />
+                  <ProfileElement />
                 </Container>
               </Paper>
             </Container>

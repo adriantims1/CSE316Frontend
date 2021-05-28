@@ -64,15 +64,6 @@ export const checkPasswordAPIMethod = (data, success) => {
     .then(checkStatus)
 
     .then(success);
-  /*return fetch(`http://localhost:5000/api/profile/checkPassword`, {
-    ...defaultHeaders,
-    method: "POST",
-    body: data,
-    credentials: "include",
-  })
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(success);*/
 };
 
 async function checkStatus(response) {

@@ -10,6 +10,7 @@ import {
   Button,
   Switch,
 } from "@material-ui/core";
+import { changeProfileAPIMethod } from "../api/profileClient";
 
 const styles = makeStyles((theme) => ({
   fontSeparator: {
@@ -47,13 +48,13 @@ const StyledButton = withStyles((theme) => ({
     textTransform: "capitalize",
   },
 }))(Button);
-export default function PaymentElement() {
+export default function SettingsElement() {
   const classes = styles();
   const [automatic, setAutomatic] = useState(true);
   const [startAmount, setStartAmount] = useState(0);
   const [maxProfit, setMaxProfit] = useState(0);
   const [timeframe, setTimeFrame] = useState(1);
-  const [option, setOption] = useState("cryptocurrency");
+
   const handleAutomatic = (e) => {
     setAutomatic((prev) => !prev);
   };
@@ -66,8 +67,16 @@ export default function PaymentElement() {
   const handleMaxProfit = (e) => {
     setMaxProfit(e.target.value);
   };
-  const handleOption = (e) => {
-    setOption(e.target.value);
+
+  const onClickSave = (e) => {
+    changeProfileAPIMethod({
+      setting: {
+        activateRobot: automatic,
+        time: timeframe,
+        maxProfit: maxProfit,
+        startingAmount: startAmount,
+      },
+    });
   };
   return (
     <>
@@ -148,7 +157,11 @@ export default function PaymentElement() {
         className={classes.formLabel}
       />
       <FormControlLabel
-        control={<StyledButton variant="contained">Save</StyledButton>}
+        control={
+          <StyledButton variant="contained" onClick={onClickSave}>
+            Save
+          </StyledButton>
+        }
         label={<Typography className={classes.fontSeparator}></Typography>}
         style={{ marginBottom: "16px" }}
       ></FormControlLabel>

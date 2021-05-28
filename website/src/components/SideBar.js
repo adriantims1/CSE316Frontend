@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { makeStyles, Grid, Box, IconButton, Button } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
-import HomeIcon from "@material-ui/icons/Home";
-import SecurityIcon from "@material-ui/icons/Security";
-import PaymentIcon from "@material-ui/icons/Payment";
-import SettingsIcon from "@material-ui/icons/Settings";
+import { makeStyles, Grid, Box, IconButton } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
 import { LogoutAPIMethod } from "../api/generalClient";
+import UserSidebar from "./SideBar SubComp/userSidebar";
+import AdminSidebar from "./SideBar SubComp/adminSidebar";
 const styles = makeStyles((theme) => ({
   sidebar: {
     height: "100%",
@@ -27,22 +24,14 @@ const styles = makeStyles((theme) => ({
     margin: "10%",
     color: "grey",
   },
-  active: {
-    backgroundColor: theme.palette.secondary.main,
-    borderRadius: "8px",
-    boxSizing: "border-box",
-    "& $icons": {
-      color: "white",
-    },
-  },
-  iconActive: {
-    color: "white",
-  },
 }));
 
 export default function SideBar() {
   const classes = styles();
   const history = useHistory();
+  const [isAdmin, setIsAdmin] = useState(
+    JSON.parse(localStorage.getItem("isAdmin"))
+  );
   const onClick_logout = () => {
     LogoutAPIMethod();
 
@@ -72,27 +61,7 @@ export default function SideBar() {
         className={`${classes.sidebar} ${classes.sidebarContent}`}
         style={{ height: "70%" }}
       >
-        <NavLink to="/dashboard" activeClassName={classes.active}>
-          <IconButton>
-            <HomeIcon className={classes.icons} />
-          </IconButton>
-        </NavLink>
-
-        <NavLink to="/admin" activeClassName={classes.active}>
-          <IconButton>
-            <SecurityIcon className={classes.icons} />
-          </IconButton>
-        </NavLink>
-        <NavLink to="/payment" activeClassName={classes.active}>
-          <IconButton>
-            <PaymentIcon className={classes.icons} />
-          </IconButton>
-        </NavLink>
-        <NavLink to="/settings" activeClassName={classes.active}>
-          <IconButton>
-            <SettingsIcon className={classes.icons} />
-          </IconButton>
-        </NavLink>
+        {isAdmin ? <AdminSidebar /> : <UserSidebar />}
       </Box>
       <Box>
         <IconButton color="secondary" onClick={onClick_logout}>

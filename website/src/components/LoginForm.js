@@ -8,6 +8,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { LoginAPIMethod } from "../api/generalClient";
+import { getprofileurlAPIMethod } from "../api/profileClient";
 
 const StyledButton = withStyles((theme) => ({
   root: {
@@ -38,8 +39,19 @@ export default function LoginForm() {
   const sendLoginInfo = (e) => {
     try {
       LoginAPIMethod({ email: email, password: pass }, (res) => {
-        console.log(res);
-        history.push(`/dashboard`);
+        getprofileurlAPIMethod((res) => {
+          console.log(res.data.data);
+          localStorage.setItem("accountType", res.data.data.accountType);
+          localStorage.setItem("name", res.data.data.name);
+          localStorage.setItem("profile_url", res.data.data.profile_url);
+          localStorage.setItem(
+            "setting",
+            JSON.stringify(res.data.data.setting)
+          );
+          localStorage.setItem("isAdmin", res.data.data.isAdmin);
+          localStorage.setItem("email", res.data.data.email);
+          history.push(`/dashboard`);
+        });
       });
     } catch (err) {
       alert(err.response);
