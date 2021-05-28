@@ -80,7 +80,7 @@ async function checkStatus(response) {
     const res = await parseJSON(response);
     const error = new Error(`HTTP Error: ${response.statusText}`);
     error.status = response.statusText;
-    error.response = res.message;
+    error.response = res.message ? res.message : res;
 
     throw error;
   }

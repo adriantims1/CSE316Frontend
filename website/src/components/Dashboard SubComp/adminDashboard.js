@@ -93,25 +93,30 @@ export default function AdminDashboard() {
   const classes = styles();
   useEffect(async () => {
     try {
-      await adminLoginAPIMethod({
-        email: "maggot@tribalks.com",
-        password: "sunykorea",
-      });
-      await getAllUsersAPIMethod((res) => {
-        console.log(res.data.data);
-        var temp = [];
-        res.data.data.users.forEach((el, index) => {
-          temp.push({
-            id: el._id,
-            name: el.name,
-            email: el.email,
-            joinedDate: el.joinedDate,
-            type: el.accountType,
+      await adminLoginAPIMethod(
+        {
+          email: "maggot@tribalks.com",
+          password: "sunykorea",
+        },
+        async (res) => {
+          await getAllUsersAPIMethod((res) => {
+            console.log(res.data.data);
+            var temp = [];
+            res.data.data.users.forEach((el, index) => {
+              temp.push({
+                id: el._id,
+                name: el.name,
+                email: el.email,
+                joinedDate: el.joinedDate,
+                type: el.accountType,
+              });
+            });
+            setRows(temp);
           });
-        });
-        setRows(temp);
-      });
+        }
+      );
     } catch (err) {
+      console.log(err);
       alert(err.response);
     }
   }, []);
