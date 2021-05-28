@@ -44,9 +44,9 @@ export default function LoginForm() {
   };
   const sendLoginInfo = async (e) => {
     try {
-      await LoginAPIMethod({ email: email, password: pass }, (res) => {
-        localStorage.setItem("balance", res.data.balance);
-        getprofileurlAPIMethod((res) => {
+      await LoginAPIMethod({ email: email, password: pass }, async (res) => {
+        localStorage.setItem("balance", res.data.data.balance);
+        await getprofileurlAPIMethod((res) => {
           console.log(res.data.data);
           localStorage.setItem("accountType", res.data.data.accountType);
           localStorage.setItem("name", res.data.data.name);
@@ -61,6 +61,7 @@ export default function LoginForm() {
         });
       });
     } catch (err) {
+      console.log(err);
       setOpen(true);
     }
   };

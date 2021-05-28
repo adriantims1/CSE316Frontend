@@ -25,13 +25,11 @@ export const signUpAPIInfo = (profile, success) => {
 };
 
 export const LoginAPIMethod = (profile, success) => {
-  return fetch(`http://localhost:5000/api/profile/login`, {
-    ...defaultHeaders,
-    method: "POST",
-    body: JSON.stringify(profile),
-  })
+  return axios
+    .post(`http://localhost:5000/api/profile/login`, profile, {
+      withCredentials: true,
+    })
     .then(checkStatus)
-    .then(parseJSON)
     .then(success);
 };
 export const LogoutAPIMethod = (success) => {
