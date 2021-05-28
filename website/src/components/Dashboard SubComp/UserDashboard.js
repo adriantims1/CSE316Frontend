@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import TransactionCard from "../TransactionCard";
 import EqualizerOutlinedIcon from "@material-ui/icons/EqualizerOutlined";
@@ -11,6 +11,8 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
+
+import { getBinomoDealsAPIMethod } from "../../api/profileClient";
 
 const styles = makeStyles((theme) => ({
   cardContainer: {
@@ -39,6 +41,13 @@ const styles = makeStyles((theme) => ({
 
 export default function UserDashboard() {
   const classes = styles();
+  const [deals, setDeals] = useState([]);
+  useEffect(() => {
+    getBinomoDealsAPIMethod((res) => {
+      console.log(res.data.data);
+      setDeals(res.data.data);
+    });
+  }, []);
   return (
     <>
       <Container className={classes.cardContainer}>
@@ -66,7 +75,9 @@ export default function UserDashboard() {
                 style={{ fontSize: "32px", fontWeight: "bold" }}
                 color="primary"
               >
-                {`USD 5,600.00`}
+                {`$ ${(Number(localStorage.getItem("balance")) / 100).toFixed(
+                  2
+                )}`}
               </Typography>
             </Box>
           </CardContent>
@@ -166,8 +177,13 @@ export default function UserDashboard() {
           justifyContent: "space-between",
         }}
       >
-        {["", "", "", "", ""].map((element) => (
-          <TransactionCard />
+        {deals.map((el) => (
+          <TransactionCard
+            name={el.asset_name}
+            amount={el.amount}
+            return={el.win}
+            status={el.status}
+          />
         ))}
       </Box>
     </>

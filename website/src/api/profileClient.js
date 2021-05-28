@@ -4,8 +4,8 @@ const defaultHeaders = {
     "Content-Type": "application/json; charset=UTF-8",
   },
 };
-export const GetProfileDataAPIMethod = (profile, success) => {
-  return fetch(`/api/profile/checkonline`, {
+export const GetProfileDataAPIMethod = (success) => {
+  return fetch(`/api/profile/checkOnline`, {
     ...defaultHeaders,
     method: "GET",
   })
@@ -37,6 +37,14 @@ export const getprofileurlAPIMethod = (success) => {
     .then(checkStatus)
     .then(success);
 };
+export const getBinomoDealsAPIMethod = (success) => {
+  return axios
+    .get("http://localhost:5000/api/profile/fetchBinomoDeals", {
+      withCredentials: true,
+    })
+    .then(checkStatus)
+    .then(success);
+};
 
 export const changeProfileAPIMethod = (data, success) => {
   return axios
@@ -44,7 +52,6 @@ export const changeProfileAPIMethod = (data, success) => {
       withCredentials: true,
     })
     .then(checkStatus)
-
     .then(success);
 };
 

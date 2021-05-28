@@ -16,11 +16,10 @@ export const ContactUsInfoAPIMethod = (userInfo, success) => {
 };
 
 export const signUpAPIInfo = (profile, success) => {
-  return fetch(`http://localhost:5000/api/profile/register`, {
-    ...defaultHeaders,
-    method: "POST",
-    body: JSON.stringify(profile),
-  })
+  return axios
+    .post(`http://localhost:5000/api/profile/register`, profile, {
+      withCredentials: true,
+    })
     .then(checkStatus)
     .then(success);
 };
@@ -32,6 +31,7 @@ export const LoginAPIMethod = (profile, success) => {
     body: JSON.stringify(profile),
   })
     .then(checkStatus)
+    .then(parseJSON)
     .then(success);
 };
 export const LogoutAPIMethod = (success) => {

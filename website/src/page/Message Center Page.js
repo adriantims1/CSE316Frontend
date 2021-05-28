@@ -71,7 +71,7 @@ export default function MessageCenter() {
         <Paper className={classes.rightContainer}>
           <UserHeader page="Message Center" />
           <Container className={classes.contentContainer}>
-            <DataGrid rows={rows} columns={columns} />
+            <DataGrid rows={rows} columns={columns} pageSize={10} />
           </Container>
         </Paper>
       </Grid>

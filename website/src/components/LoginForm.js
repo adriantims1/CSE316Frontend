@@ -39,6 +39,8 @@ export default function LoginForm() {
   const sendLoginInfo = (e) => {
     try {
       LoginAPIMethod({ email: email, password: pass }, (res) => {
+        console.log(res);
+        localStorage.setItem("balance", res.data.balance);
         getprofileurlAPIMethod((res) => {
           console.log(res.data.data);
           localStorage.setItem("accountType", res.data.data.accountType);
