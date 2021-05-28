@@ -42,11 +42,15 @@ const styles = makeStyles((theme) => ({
 export default function UserDashboard() {
   const classes = styles();
   const [deals, setDeals] = useState([]);
-  useEffect(() => {
-    getBinomoDealsAPIMethod((res) => {
-      console.log(res.data.data);
-      setDeals(res.data.data);
-    });
+  useEffect(async () => {
+    try {
+      await getBinomoDealsAPIMethod((res) => {
+        console.log(res.data.data);
+        setDeals(res.data.data);
+      });
+    } catch (err) {
+      alert(err.response);
+    }
   }, []);
   return (
     <>

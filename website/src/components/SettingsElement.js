@@ -68,15 +68,19 @@ export default function SettingsElement() {
     setMaxProfit(e.target.value);
   };
 
-  const onClickSave = (e) => {
-    changeProfileAPIMethod({
-      setting: {
-        activateRobot: automatic,
-        time: timeframe,
-        maxProfit: maxProfit,
-        startingAmount: startAmount,
-      },
-    });
+  const onClickSave = async (e) => {
+    try {
+      changeProfileAPIMethod({
+        setting: {
+          activateRobot: automatic,
+          time: timeframe,
+          maxProfit: maxProfit,
+          startingAmount: startAmount,
+        },
+      });
+    } catch (err) {
+      alert(err.response);
+    }
   };
   return (
     <>

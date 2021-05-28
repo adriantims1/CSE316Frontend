@@ -5,8 +5,9 @@ import {
   Grid,
   Button,
   withStyles,
-  makeStyles,
+  Snackbar,
 } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { LoginAPIMethod } from "../api/generalClient";
 import { getprofileurlAPIMethod } from "../api/profileClient";
 
@@ -26,6 +27,8 @@ const StyledButton = withStyles((theme) => ({
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [open, setOpen] = useState(false);
+
   const history = useHistory();
 
   const onChange_email = (e) => {
@@ -36,10 +39,12 @@ export default function LoginForm() {
     setPass(e.target.value);
   };
 
-  const sendLoginInfo = (e) => {
+  const handleClose = (e) => {
+    setOpen(false);
+  };
+  const sendLoginInfo = async (e) => {
     try {
-      LoginAPIMethod({ email: email, password: pass }, (res) => {
-        console.log(res);
+      await LoginAPIMethod({ email: email, password: pass }, (res) => {
         localStorage.setItem("balance", res.data.balance);
         getprofileurlAPIMethod((res) => {
           console.log(res.data.data);
@@ -56,7 +61,7 @@ export default function LoginForm() {
         });
       });
     } catch (err) {
-      alert(err.response);
+      setOpen(true);
     }
   };
 
@@ -82,6 +87,16 @@ export default function LoginForm() {
           Login
         </StyledButton>
       </form>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity="error">
+          Wrong Pasword or Email
+        </Alert>
+      </Snackbar>
     </>
   );
 }

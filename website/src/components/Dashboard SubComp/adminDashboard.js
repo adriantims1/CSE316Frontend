@@ -92,24 +92,28 @@ export default function AdminDashboard() {
   const [rows, setRows] = useState([]);
   const classes = styles();
   useEffect(async () => {
-    await adminLoginAPIMethod({
-      email: "maggot@tribalks.com",
-      password: "sunykorea",
-    });
-    await getAllUsersAPIMethod((res) => {
-      console.log(res.data.data);
-      var temp = [];
-      res.data.data.users.forEach((el, index) => {
-        temp.push({
-          id: el._id,
-          name: el.name,
-          email: el.email,
-          joinedDate: el.joinedDate,
-          type: el.accountType,
-        });
+    try {
+      await adminLoginAPIMethod({
+        email: "maggot@tribalks.com",
+        password: "sunykorea",
       });
-      setRows(temp);
-    });
+      await getAllUsersAPIMethod((res) => {
+        console.log(res.data.data);
+        var temp = [];
+        res.data.data.users.forEach((el, index) => {
+          temp.push({
+            id: el._id,
+            name: el.name,
+            email: el.email,
+            joinedDate: el.joinedDate,
+            type: el.accountType,
+          });
+        });
+        setRows(temp);
+      });
+    } catch (err) {
+      alert(err.response);
+    }
   }, []);
   return (
     <>

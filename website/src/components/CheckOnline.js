@@ -6,16 +6,20 @@ export default function CheckOnline(props) {
   const history = useHistory();
   const [state, setState] = useState(false);
   useEffect(async () => {
-    const sess = await CheckOnlineAPIMethod();
-    if (
-      sess.data &&
-      (!props.isAdminRoute || JSON.parse(localStorage.getItem("isAdmin")))
-    ) {
-      setState(true);
-    } else {
-      console.log("false");
-      setState(false);
-      history.push("/");
+    try {
+      const sess = await CheckOnlineAPIMethod();
+      if (
+        sess.data &&
+        (!props.isAdminRoute || JSON.parse(localStorage.getItem("isAdmin")))
+      ) {
+        setState(true);
+      } else {
+        console.log("false");
+        setState(false);
+        history.push("/");
+      }
+    } catch (err) {
+      alert(err.message);
     }
   });
   return <div>{state ? props.success : null}</div>;

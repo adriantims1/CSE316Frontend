@@ -41,10 +41,11 @@ async function checkStatus(response) {
     return response;
   } else {
     const res = await parseJSON(response);
+
     const error = new Error(`HTTP Error: ${response.statusText}`);
     error.status = response.statusText;
-    error.response = res;
-    console.log(error);
+    error.response = res.message;
+
     throw error;
   }
 }

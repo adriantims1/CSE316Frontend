@@ -40,10 +40,14 @@ const Live = () => {
   const [transHistory, setTransHistory] = useState([]);
   const [price, setCurrPrice] = useState(0);
   const fetchBinProfile = async () => {
-    var temp = await axios.get("/api/binProfile/");
-    temp = temp.data.data;
-    console.log(temp);
-    setTransHistory(temp);
+    try {
+      var temp = await axios.get("/api/binProfile/");
+      temp = temp.data.data;
+      console.log(temp);
+      setTransHistory(temp);
+    } catch (err) {
+      alert(err);
+    }
   };
   useEffect(() => {
     var a = setInterval(async () => {

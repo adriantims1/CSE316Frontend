@@ -47,21 +47,25 @@ export default function MessageCenter() {
   ];
   const [rows, setRows] = useState([]);
 
-  useEffect(() => {
-    getAllMessagesAPIMethod((res) => {
-      console.log(res.data.data.infos);
-      var temp = [];
-      res.data.data.infos.forEach((el) => {
-        temp.push({
-          id: el._id,
-          name: el.name,
-          email: el.email,
-          date: el.date,
-          message: el.message,
+  useEffect(async () => {
+    try {
+      getAllMessagesAPIMethod((res) => {
+        console.log(res.data.data.infos);
+        var temp = [];
+        res.data.data.infos.forEach((el) => {
+          temp.push({
+            id: el._id,
+            name: el.name,
+            email: el.email,
+            date: el.date,
+            message: el.message,
+          });
         });
+        setRows(temp);
       });
-      setRows(temp);
-    });
+    } catch (err) {
+      alert(err.response);
+    }
   }, []);
   const classes = styles();
   return (

@@ -25,7 +25,7 @@ export const signUpAPIInfo = (profile, success) => {
 };
 
 export const LoginAPIMethod = (profile, success) => {
-  return fetch(`/api/profile/login`, {
+  return fetch(`http://localhost:5000/api/profile/login`, {
     ...defaultHeaders,
     method: "POST",
     body: JSON.stringify(profile),
@@ -61,11 +61,13 @@ async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
+    console.log("testing");
     const res = await parseJSON(response);
+
     const error = new Error(`HTTP Error: ${response.statusText}`);
     error.status = response.statusText;
-    error.response = res;
-    console.log(error);
+    error.response = res.message;
+
     throw error;
   }
 }

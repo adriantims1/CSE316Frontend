@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { TextField, Grid, Button, withStyles, makeStyles } from "@material-ui/core";
+import {
+  TextField,
+  Grid,
+  Button,
+  withStyles,
+  makeStyles,
+} from "@material-ui/core";
 import { signUpAPIInfo } from "../api/generalClient";
-
 
 const StyledButton = withStyles((theme) => ({
   root: {
@@ -25,47 +30,51 @@ export default function LoginForm() {
   const history = useHistory();
 
   const onChange_name = (e) => {
-    e.preventDefault();
     setName(e.target.value);
-  }
+  };
 
   const onChange_email = (e) => {
-    e.preventDefault();
     setEmail(e.target.value);
-  }
+  };
 
   const onChange_password = (e) => {
-    e.preventDefault();
     setPass(e.target.value);
-  }
+  };
 
   const sendSignUpInfo = (e) => {
-    e.preventDefault();
-    console.log("Signing up for: " ,email);
+    console.log("Signing up for: ", email);
     try {
-      e.preventDefault();
-      signUpAPIInfo({ name:name,email: email, password: pass }, (res)=> {console.log(res)});
+      signUpAPIInfo({ name: name, email: email, password: pass }, (res) => {
+        console.log(res);
+      });
       history.push(`/dashboard`);
-    }
-    catch (err) {
+    } catch (err) {
       alert(err.response);
     }
-  }
+  };
 
   return (
     <>
       <form>
-
-      <Grid item>
-          <TextField label="Name" onChange={onChange_name}/>
+        <Grid item>
+          <TextField label="Name" onChange={onChange_name} />
         </Grid>
         <Grid item>
-          <TextField label="Email" value={email} onChange={onChange_email}/>
+          <TextField label="Email" value={email} onChange={onChange_email} />
         </Grid>
         <Grid item>
-          <TextField label="Password" value={pass} type="password" onChange={onChange_password}/>
+          <TextField
+            label="Password"
+            value={pass}
+            type="password"
+            onChange={onChange_password}
+          />
         </Grid>
-        <StyledButton variant="contained" style={{ margin: "16px" }} onClick={sendSignUpInfo} >
+        <StyledButton
+          variant="contained"
+          style={{ margin: "16px" }}
+          onClick={sendSignUpInfo}
+        >
           Login
         </StyledButton>
       </form>

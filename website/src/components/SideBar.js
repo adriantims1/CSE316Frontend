@@ -32,10 +32,14 @@ export default function SideBar() {
   const [isAdmin, setIsAdmin] = useState(
     JSON.parse(localStorage.getItem("isAdmin"))
   );
-  const onClick_logout = () => {
-    LogoutAPIMethod();
-
-    history.push("/");
+  const onClick_logout = async () => {
+    try {
+      LogoutAPIMethod();
+      localStorage.clear();
+      history.push("/");
+    } catch (err) {
+      alert(err.response);
+    }
   };
   return (
     <Grid item className={classes.sidebar}>
