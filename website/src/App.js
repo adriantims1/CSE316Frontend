@@ -8,7 +8,10 @@ import Admin from "./page/Admin";
 import Payment from "./page/Payment";
 import Settings from "./page/Settings";
 import Profile from "./page/Profile";
+
 import MessageCenter from "./page/Message Center Page";
+import ContactUserVAdmin from "./page/Contact User-Admin";
+
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
 import CheckOnline from "./components/CheckOnline";
@@ -44,6 +47,9 @@ function App() {
           </Route>
           <Route path="/msgcenter">
             <CheckOnline success={<MessageCenter />} />
+          </Route>
+          <Route path="/contactUserVAdmin">
+            <CheckOnline success={<ContactUserVAdmin />} />
           </Route>
           <Route path="/dashboard">
             <CheckOnline success={<Dashboard />} />

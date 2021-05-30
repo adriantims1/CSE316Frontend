@@ -5,6 +5,8 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { NavLink } from "react-router-dom";
 import { IconButton, makeStyles } from "@material-ui/core";
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+
 
 const styles = makeStyles((theme) => ({
   active: {
@@ -38,6 +40,11 @@ export default function userSidebar() {
       <NavLink to="/settings" activeClassName={classes.active}>
         <IconButton>
           <SettingsIcon className={classes.icons} />
+        </IconButton>
+      </NavLink>
+      <NavLink to="/contactUserVAdmin" activeClassName={classes.active}>
+        <IconButton>
+          <ContactMailIcon className={classes.icons} />
         </IconButton>
       </NavLink>
     </>
