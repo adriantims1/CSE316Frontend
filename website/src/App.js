@@ -9,6 +9,7 @@ import Payment from "./page/Payment";
 import Settings from "./page/Settings";
 import Profile from "./page/Profile";
 import PageNotFound from "./page/PageNotFound";
+import Statistics from "./page/Statistics";
 
 import MessageCenter from "./page/MessageCenter";
 import ContactUserVAdmin from "./page/Contact User-Admin";
@@ -59,6 +60,10 @@ function App() {
           <Route path="/graph">
             <CheckOnline success={<UserTransGraph />} />
           </Route>
+          <Route path="/statistics">
+            <CheckOnline success={<Statistics />} />
+          </Route>
+
           <Route path="/live" component={Live} />
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={About} />

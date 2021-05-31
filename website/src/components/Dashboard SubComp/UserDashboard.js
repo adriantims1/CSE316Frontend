@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import TransactionCard from "../TransactionCard";
 import EqualizerOutlinedIcon from "@material-ui/icons/EqualizerOutlined";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";

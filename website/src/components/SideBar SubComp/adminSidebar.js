@@ -5,6 +5,7 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import { NavLink } from "react-router-dom";
 import { IconButton, makeStyles } from "@material-ui/core";
 import ForumIcon from '@material-ui/icons/Forum';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
 
 const styles = makeStyles((theme) => ({
   active: {
@@ -44,6 +45,11 @@ export default function adminSidebar() {
       <NavLink to="/msgcenter" activeClassName={classes.active}>
         <IconButton>
           <ContactMailIcon className={classes.icons} />
+        </IconButton>
+      </NavLink>
+      <NavLink to="/statistics" activeClassName={classes.active}>
+        <IconButton>
+          <ShowChartIcon className={classes.icons} />
         </IconButton>
       </NavLink>
       
