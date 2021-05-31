@@ -10,7 +10,11 @@ import {
   Container,
   Card,
   CardContent,
+  Icon,
+  IconButton
 } from "@material-ui/core";
+
+import { useHistory } from "react-router-dom";
 
 import { getBinomoDealsAPIMethod } from "../../api/profileClient";
 
@@ -40,6 +44,7 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function UserDashboard() {
+  const history = useHistory();
   const classes = styles();
   const [deals, setDeals] = useState([]);
   useEffect(async () => {
@@ -107,21 +112,31 @@ export default function UserDashboard() {
               style={{ justifyContent: "space-even" }}
               direction="row"
             >
-              <EqualizerOutlinedIcon
-                style={{
-                  zIndex: "2",
-                  alignSelf: "center",
-                  justifySelf: "center",
-                  height: "75px",
-                  width: "75px",
-                  left: "10",
-                  backgroundColor: "#B0D2E8",
-                  borderRadius: "50%",
-                  padding: "12px",
-                  boxSizing: "border-box",
+              <IconButton
+                onClick={() => {
+                  history.push("/graph");
                 }}
-                color="secondary"
-              />
+                disableRipple={true}
+                disableFocusRipple={true}
+                edge="false"
+              >
+
+                <EqualizerOutlinedIcon
+                  style={{
+                    zIndex: "2",
+                    alignSelf: "center",
+                    justifySelf: "center",
+                    height: "75px",
+                    width: "75px",
+                    left: "10",
+                    backgroundColor: "#B0D2E8",
+                    borderRadius: "50%",
+                    padding: "12px",
+                    boxSizing: "border-box",
+                  }}
+                  color="secondary"
+                />
+              </IconButton>
               <Box
                 display="flex"
                 style={{

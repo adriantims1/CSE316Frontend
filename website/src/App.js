@@ -12,6 +12,7 @@ import PageNotFound from "./page/PageNotFound";
 
 import MessageCenter from "./page/MessageCenter";
 import ContactUserVAdmin from "./page/Contact User-Admin";
+import UserTransGraph from "./components/Statistics SubComp/UserTransGraph";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
@@ -55,7 +56,9 @@ function App() {
           <Route path="/dashboard">
             <CheckOnline success={<Dashboard />} />
           </Route>
-
+          <Route path="/graph">
+            <CheckOnline success={<UserTransGraph />} />
+          </Route>
           <Route path="/live" component={Live} />
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={About} />
