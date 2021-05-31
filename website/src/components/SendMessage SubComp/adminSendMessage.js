@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
-
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
+
+
 
 import {
   makeStyles,
   withStyles,
+  Snackbar,
 } from "@material-ui/core";
-// import { postMessagesAPIMethod } from "../api/adminClient";
+import { NotifyAPIMethod } from "../../api/adminClient";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const styles = makeStyles((theme) => ({
   field: {
@@ -49,9 +57,60 @@ export default function MessageCenter() {
   const [titleError, setTitleError] = useState(false)
   const [detailsError, setDetailsError] = useState(false)
   const [category, setCategory] = useState('money')
+  const [open, setOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [status, setStatus] = useState("");
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      if (!title || !details) {
+        if (!title) setTitleError(true);
+        if (!details) setDetailsError(true);
+        return;
+      }
+      setTitleError(false)
+      setDetailsError(false)
+
+      if (title == '') {
+        setTitleError(true)
+      }
+      if (details == '') {
+        setDetailsError(true)
+      }
+      if (title && details) {
+        console.log(localStorage.getItem("name"), localStorage.getItem("email"), title, details);
+        await NotifyAPIMethod({
+          Date: new Date(),
+          Title: category + " : " + title,
+          Notice: details,
+
+        });
+        onClick_send(e);
+      }
+    }
+    catch (err) {
+      console.log("FrontEnd: ", err);
+      setSnackbarMessage(err.response);
+      setStatus("error");
+      setOpen(true);
+    }
+  };
+
+
+  const handleClose = (e, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+  const onClick_send = (e) => {
+    setSnackbarMessage("Message Sent!");
+    setStatus("success");
+    setOpen(true);
+  };
   return (
-    <form noValidate>
+    <form noValidate onSubmit={handleSubmit}>
       <TextField className={classes.field}
         onChange={(e) => setTitle(e.target.value)}
         label="Notification Title"
@@ -80,8 +139,21 @@ export default function MessageCenter() {
           <FormControlLabel value="Monthly notice" control={<Radio />} label="Monthly notice" />
         </RadioGroup>
       </FormControl>
-      <StyledButton>Send</StyledButton>
-    </form>
 
+      <StyledButton type="submit" >Send</StyledButton>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity={status}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </form>
   );
 }
+
+

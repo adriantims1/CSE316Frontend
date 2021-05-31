@@ -1,5 +1,9 @@
 import axios from "axios";
-
+const defaultHeaders = {
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8",
+  },
+};
 export const adminLoginAPIMethod = (data, success) => {
   return axios
     .post("http://localhost:5000/api/admin/login", data, {
@@ -27,11 +31,24 @@ export const getAllUsersAPIMethod = (success) => {
     .then(success);
 };
 
+
+
 export const getAllMessagesAPIMethod = (success) => {
   return axios
     .get("http://localhost:5000/api/admin/ContactUs", {
       withCredentials: true,
     })
+    .then(checkStatus)
+    .then(success);
+};
+
+
+export const NotifyAPIMethod = (userInfo, success) => {
+  return fetch(`http://localhost:5000/api/admin/notify`, {
+    ...defaultHeaders,
+    method: "POST",
+    body: JSON.stringify(userInfo),
+  })
     .then(checkStatus)
     .then(success);
 };

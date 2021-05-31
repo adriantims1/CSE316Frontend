@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-// >>>>>>> fb55bab (api added for contactUs page message relay)
 import Navbar from "../components/NavBar";
 import { ContactUsInfoAPIMethod } from "../api/generalClient";
 
@@ -92,6 +91,7 @@ const Contact = () => {
       await ContactUsInfoAPIMethod({
         name: name,
         email: email,
+        Date: Date.now(),
         message: message,
       });
       onClick_send(e);
@@ -110,7 +110,7 @@ const Contact = () => {
     setOpen(false);
   };
   const onClick_send = (e) => {
-    setSnackbarMessage("Message Send!");
+    setSnackbarMessage("Message Sent!");
     setStatus("success");
     setOpen(true);
   };

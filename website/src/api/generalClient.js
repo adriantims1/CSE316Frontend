@@ -15,6 +15,15 @@ export const ContactUsInfoAPIMethod = (userInfo, success) => {
     .then(success);
 };
 
+export const getAllNotificationsAPIMethod = (success) => {
+  return axios
+    .get("http://localhost:5000/api/profile/notifications", {
+      withCredentials: true,
+    })
+    .then(checkStatus)
+    .then(success);
+};
+
 export const signUpAPIInfo = (profile, success) => {
   return axios
     .post(`http://localhost:5000/api/profile/register`, profile, {

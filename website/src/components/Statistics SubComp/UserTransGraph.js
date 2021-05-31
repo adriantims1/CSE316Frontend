@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../SideBar";
 import Chart from "react-apexcharts";
-
 import { Grid, Paper, makeStyles, Container } from "@material-ui/core";
-
 import UserHeader from "../userHeader";
 import { getBinomoDealsAPIMethod } from "../../api/profileClient";
 

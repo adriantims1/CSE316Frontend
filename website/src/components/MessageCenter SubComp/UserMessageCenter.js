@@ -4,8 +4,7 @@ import {
   Container,
 } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
-// import { getAllMessagesAPIMethod } from "../../api/adminClient";
-
+import { getAllNotificationsAPIMethod } from "../../api/generalClient";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -33,26 +32,27 @@ const styles = makeStyles((theme) => ({
 
 export default function MessageCenter() {
   const columns = [
-    { field: "date", headerName: "Date", width: 300 },
-    { field: "Title", headerName: "Title", width: 250 },
-    { field: "message", headerName: "Message", width: 450, sortable: false },
+    { field: "date", headerName: "Date", width: 250 },
+    { field: "title", headerName: "Title", width: 350 },
+    { field: "message", headerName: "Message", width: 650, sortable: false },
   ];
   const [rows, setRows] = useState([]);
 
   useEffect(async () => {
     try {
-      // getAllMessagesAPIMethod((res) => {
-      //   console.log(res.data.data.infos);
-      //   var temp = [];
-      //   res.data.data.infos.forEach((el) => {
-      //     temp.push({
-      //       date: el.date,
-      //       title: el.title,
-      //       message: el.message,
-      //     });
-      //   });
-      //   setRows(temp);
-      // });
+      getAllNotificationsAPIMethod((res) => {
+        var temp = [];
+        res.data.data.infos.forEach((el) => {
+          temp.push({
+            id: el._id,
+            date: el.Date,
+            title: el.Title,
+            message: el.Notice,
+          });
+        });
+        setRows(temp);
+        console.log("Printing here", temp);
+      });
     } catch (err) {
       alert(err.response);
     }
