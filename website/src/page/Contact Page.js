@@ -91,7 +91,7 @@ const Contact = () => {
       await ContactUsInfoAPIMethod({
         name: name,
         email: email,
-        Date: Date.now(),
+        date: Date.now(),
         message: message,
       });
       onClick_send(e);

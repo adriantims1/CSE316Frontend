@@ -33,11 +33,11 @@ const styles = makeStyles((theme) => ({
 
 export default function MessageCenter() {
   const columns = [
-    { field: "id", headerName: "Id", width: 150 },
+    { field: "id", headerName: "Id", width: 200 },
     { field: "name", headerName: "Name", width: 150 },
-    { field: "email", headerName: "Email", width: 250 },
-    { field: "date", headerName: "Send Date", width: 250 },
-    { field: "message", headerName: "Message", width: 350, sortable: false },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "date", headerName: "Send Date", width: 200 },
+    { field: "message", headerName: "Message", width: 500, sortable: false },
   ];
   const [rows, setRows] = useState([]);
 
