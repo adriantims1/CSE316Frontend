@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../components/SideBar";
-
 import {
-  Grid,
-  Paper,
   makeStyles,
-  Backdrop,
   Container,
 } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
-import { getAllMessagesAPIMethod } from "../api/adminClient";
+import { getAllMessagesAPIMethod } from "../../api/adminClient";
 
-import UserHeader from "../components/userHeader";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -69,16 +63,9 @@ export default function MessageCenter() {
   }, []);
   const classes = styles();
   return (
-    <Grid container alignItems="center" className={classes.root}>
-      <Sidebar />
-      <Grid item className={classes.rightbar}>
-        <Paper className={classes.rightContainer}>
-          <UserHeader page="Message Center" />
-          <Container className={classes.contentContainer}>
-            <DataGrid rows={rows} columns={columns} pageSize={10} />
-          </Container>
-        </Paper>
-      </Grid>
-    </Grid>
+    <Container className={classes.contentContainer}>
+      <DataGrid rows={rows} columns={columns} pageSize={10} />
+    </Container>
   );
+
 }

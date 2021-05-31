@@ -1,10 +1,10 @@
 import React from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import SecurityIcon from "@material-ui/icons/Security";
-import EmailIcon from "@material-ui/icons/Email";
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import { NavLink } from "react-router-dom";
 import { IconButton, makeStyles } from "@material-ui/core";
+import ForumIcon from '@material-ui/icons/Forum';
 
 const styles = makeStyles((theme) => ({
   active: {
@@ -36,16 +36,17 @@ export default function adminSidebar() {
           <SecurityIcon className={classes.icons} />
         </IconButton>
       </NavLink>
-      <NavLink to="/msgcenter" activeClassName={classes.active}>
-        <IconButton>
-          <EmailIcon className={classes.icons} />
-        </IconButton>
-      </NavLink>
       <NavLink to="/contactUserVAdmin" activeClassName={classes.active}>
+        <IconButton>
+          <ForumIcon className={classes.icons} />
+        </IconButton>
+      </NavLink> 
+      <NavLink to="/msgcenter" activeClassName={classes.active}>
         <IconButton>
           <ContactMailIcon className={classes.icons} />
         </IconButton>
       </NavLink>
+      
     </>
   );
 }

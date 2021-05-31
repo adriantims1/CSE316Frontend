@@ -8,8 +8,9 @@ import Admin from "./page/Admin";
 import Payment from "./page/Payment";
 import Settings from "./page/Settings";
 import Profile from "./page/Profile";
+import PageNotFound from "./page/PageNotFound";
 
-import MessageCenter from "./page/Message Center Page";
+import MessageCenter from "./page/MessageCenter";
 import ContactUserVAdmin from "./page/Contact User-Admin";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
@@ -59,9 +60,8 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={About} />
           <Route exact path="/" component={Landing} />
-          <Route path="*" exact={true}>
-            <div>Not Found</div>
-          </Route>
+          <Route path="*" exact={true} component={PageNotFound} />
+
         </Switch>
       </div>
     </ThemeProvider>
