@@ -46,9 +46,10 @@ export default function UserDashboard() {
   const history = useHistory();
   const classes = styles();
   const [deals, setDeals] = useState([]);
+  
   useEffect(async () => {
     try {
-      await getBinomoDealsAPIMethod((res) => {
+      await getBinomoDealsAPIMethod(5, (res) => {
         console.log(res.data.data);
         setDeals(res.data.data);
       });
@@ -56,6 +57,7 @@ export default function UserDashboard() {
       alert(err.response);
     }
   }, []);
+
   return (
     <>
       <Container className={classes.cardContainer}>

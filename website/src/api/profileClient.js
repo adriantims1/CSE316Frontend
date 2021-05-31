@@ -37,14 +37,17 @@ export const getprofileurlAPIMethod = (success) => {
     .then(checkStatus)
     .then(success);
 };
-export const getBinomoDealsAPIMethod = (success) => {
+
+export const getBinomoDealsAPIMethod = (amount, success) => {
   return axios
-    .get("http://localhost:5000/api/profile/fetchBinomoDeals", {
+    .get(`http://localhost:5000/api/profile/fetchBinomoDeals/${amount}`, {
       withCredentials: true,
     })
     .then(checkStatus)
     .then(success);
 };
+
+
 
 export const changeProfileAPIMethod = (data, success) => {
   return axios
