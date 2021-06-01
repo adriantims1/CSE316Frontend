@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/SideBar";
 import UserHeader from "../components/userHeader";
 import Chart from "react-apexcharts";
 import Masonry from 'react-masonry-css';
-// import { postMessagesAPIMethod } from "../api/adminClient";
 
 import {
   Grid,
   Paper,
   makeStyles,
-  withStyles,
-  Container,
 } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
@@ -38,29 +35,35 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function ContactUserVAdmin() {
-  const localUser = JSON.parse(localStorage.getItem("isAdmin"));
-  const [isAdmin, setIsAdmin] = useState(localUser);
+
+  const [isAdmin, setIsAdmin] = useState(JSON.parse(localStorage.getItem("isAdmin")));
   const classes = styles();
 
   //BAR graph
-  const [optionsB, setOptions] = useState({ chart: { id: "basic-bar" }, xaxis: { categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998] } });
-  const [seriesB, setSeries] = useState([{ name: "series-1", data: [30, 40, 45, 50, 49, 60, 70, 91] }]);
+  var users = JSON.parse(localStorage.getItem("users"));
+  let month = {};
+  (users).forEach(element => (month[new Date(element.joinedDate).getMonth()]) ? month[new Date(element.joinedDate).getMonth()] += 1 : month[new Date(element.joinedDate).getMonth()] = 1);
+  let monthCategories = ["Jan", "Feb", "Mar",];
+  let monthData = [8, 7, 9];
+  let MonthLst = ['0', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  Object.keys(month).forEach(element => {
+    monthCategories.push(MonthLst[element])
+    monthData.push(month[element])
+  });
+  const [optionsB, setOptions] = useState({ chart: { id: "basic-bar" }, xaxis: { categories: monthCategories } });
+  const [seriesB, setSeries] = useState([{ name: "User Joining size", data: monthData }]);
+
 
   //DONUT graph
-  const [optionsD, setOptionsD] = useState({});
-  const [seriesD, setSeriesD] = useState([44, 55, 41, 17, 15]);
-  const [labelsD, setLabelsD] = useState(['A', 'B', 'C', 'D', 'E']);
-  // const breakpoints = {
-  //   default: 3,
-  //   1100: 3,
-  //   300: 1
-  // };
+  const [optionsD, setOptionsD] = useState({ labels: ['Win', 'Loss', 'Tie'] });
+  let x = localStorage.getItem("seriesD")
+  const [seriesD, setSeriesD] = useState([Number(x[0]), Number(x[2]), Number(x[4])]);
+
 
   const breakpoints = {
-    default: 4,
-    1100: 3,
-    700: 2,
-    500: 1
+    default: 2,
+    1100: 2,
+    700: 1
   };
 
   return (
@@ -74,17 +77,22 @@ export default function ContactUserVAdmin() {
             breakpointCols={breakpoints}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column">
-            {isAdmin ? "Admin" : "USER"}
-            <Chart
-              options={optionsB}
-              series={seriesB}
-              type="bar"
-              width="500"
-            />
-            <Chart options={optionsD} series={seriesD} type="donut" width="380" />
 
+            <div>{isAdmin ? "Admin-: " : "Profile-"}</div>
+
+            <div>
+              {isAdmin && <Chart
+                options={optionsB}
+                series={seriesB}
+                type="bar"
+                width="500"
+              />}
+            </div>
+
+            <div>
+              <Chart options={optionsD} series={seriesD} type="pie" width="380" />
+            </div>
           </Masonry>
-
 
         </Paper>
       </Grid>

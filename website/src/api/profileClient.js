@@ -48,7 +48,6 @@ export const getBinomoDealsAPIMethod = (amount, success) => {
 };
 
 
-
 export const changeProfileAPIMethod = (data, success) => {
   return axios
     .post("http://localhost:5000/api/profile/settings", data, {

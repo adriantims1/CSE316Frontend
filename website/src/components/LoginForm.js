@@ -42,6 +42,8 @@ export default function LoginForm() {
   const handleClose = (e) => {
     setOpen(false);
   };
+
+
   const sendLoginInfo = async (e) => {
     try {
       await LoginAPIMethod({ email: email, password: pass }, async (res) => {
@@ -65,6 +67,7 @@ export default function LoginForm() {
       setOpen(true);
     }
   };
+
 
   return (
     <>

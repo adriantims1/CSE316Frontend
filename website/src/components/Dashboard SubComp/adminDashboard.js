@@ -100,7 +100,10 @@ export default function AdminDashboard() {
         },
         async (res) => {
           await getAllUsersAPIMethod((res) => {
-            console.log(res.data.data);
+            console.log(res.data.data); //console log all users
+
+            localStorage.setItem('users', JSON.stringify(res.data.data.users)); //stringify object and store
+
             var temp = [];
             res.data.data.users.forEach((el, index) => {
               temp.push({
@@ -112,6 +115,8 @@ export default function AdminDashboard() {
               });
             });
             setRows(temp);
+
+
           });
         }
       );
