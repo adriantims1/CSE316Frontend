@@ -164,7 +164,7 @@ export default function Navbar() {
                       }
                     }}
                   >
-                    Login
+                    {localStorage.getItem("isLoggedin") ? "Dashboard" : "Login"}
                   </StyledButton>
                 </ListItem>
               </List>

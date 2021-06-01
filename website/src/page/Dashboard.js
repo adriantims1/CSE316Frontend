@@ -33,7 +33,15 @@ export default function Dashboard() {
   const [isAdmin, setIsAdmin] = useState(
     JSON.parse(localStorage.getItem("isAdmin"))
   );
+  const [executed, setExecuted] = useState(false);
   const classes = styles();
+  var doOnce = () => {
+    if (!executed) {
+      setExecuted(true);
+      localStorage.setItem("isLoggedin", true);
+    }
+  };
+  doOnce();
 
   useEffect(async () => {
     try {
