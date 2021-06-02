@@ -4,90 +4,107 @@ import {
     Box,
     makeStyles,
     Grid,
-    withStyles,
     Typography,
-    Button,
-    Container
 } from "@material-ui/core";
 
 
 const styles = makeStyles((theme) => ({
     innerContainer: {
-        width: "95%",
         backgroundColor: theme.palette.primary.main,
         margin: "0px 2%",
-        boxSizing: "border-box",
-    },
-    creative: {
-        color: "black",
-        fontFamily: "Inter",
-        fontSize: "56px",
-        fontWeight: "medium",
-    },
-    solutions: {
-        color: theme.palette.secondary.main,
-        fontFamily: "Inter",
-        fontWeight: "bold",
-        fontSize: "80px",
+        height: "90%"
+
     },
     body: {
         fontFamily: "Inter",
         fontWeight: "light",
         fontSize: "24px",
     },
+    fontSeparator: {
+        fontFamily: "Inter",
+        fontWeight: "bold",
+        fontSize: "40px",
+
+        color: theme.palette.secondary.main,
+        marginBottom: "1%",
+    },
 }));
 
-const StyledButton = withStyles((theme) => ({
-    root: {
-        backgroundColor: theme.palette.secondary.main,
-        color: "white",
-        width: "50%",
-    },
-    label: {
-        textTransform: "capitalize",
-        fontSize: "24px",
-    },
-}))(Button);
 
-const Landing = () => {
+const About = () => {
     const classes = styles();
     return (
         <>
             <Navbar />
-            <Container
+            <Box
                 display="flex"
                 style={{
-                    height: "90vh",
+                    height: "80vh",
                     alignItems: "center",
+                    // border: "2px solid red",
                 }}
             >
                 <Grid
                     container
                     direction="row"
                     alignItems="center"
-                    style={{ justifyContent: "space-between" }}
+                    style={{
+                        justifyContent: "space-between",
+                    }}
                     className={classes.innerContainer}
                 >
-                    <Grid item>
+                    <Grid item justifyContent="flex-start" style={{
+                        // border: "2px solid yellow",
+                        height: "70%",
+                        width: "50%"
+
+                    }}>
+
                         <img
-                            src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620962204/picture_pqypsw.svg"
-                            style={{ height: "75%" }}
+                            src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1622619080/aboutuspicture_ubaw9q.svg"
                             alt=""
                         ></img>
-                    </Grid>
 
-                    <Grid item >
-                        <Box display="flex">
-                            <Typography className={classes.predictor} color="secondary">
-                                Live Trades
+                    </Grid>
+                    <Grid item style={{
+                        height: "90%",
+                        // border: "2px solid red",
+                        width: "48%"
+
+                    }}>
+
+                        <Box
+                            display="flex"
+                            style={{
+                                flexDirection: "column",
+                                height: "100%",
+                                width: "90%",
+                            }}
+                        >
+                            <Typography variant="h2" className={classes.fontSeparator}>
+                                What if you can invest money without any skills?
+                                </Typography>
+
+                            <br />
+                            <Typography variant="body1" className={classes.body} style={{
+                                height: "90%",
+
+                            }}>
+                                You are in a right place:
+                                We use binary option predictor using machine learning and give you a huge profit.
+                                Just a click away.
+
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Non, officia pariatur omnis in exercitationem perferendis reprehenderit dolores.
+                                Architecto iusto praesentium ea, vero rem voluptatibus nulla velit labore sit possimus ab.
                             </Typography>
                         </Box>
-
                     </Grid>
                 </Grid>
-            </Container>
+            </Box>
+
         </>
     );
 };
 
-export default Landing;
+export default About;
