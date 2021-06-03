@@ -9,8 +9,7 @@ import {
   Container,
   Card,
   CardContent,
-  Icon,
-  IconButton
+  IconButton,
 } from "@material-ui/core";
 
 import { useHistory } from "react-router-dom";
@@ -46,16 +45,19 @@ export default function UserDashboard() {
   const history = useHistory();
   const classes = styles();
   const [deals, setDeals] = useState([]);
-  
-  useEffect(async () => {
-    try {
-      await getBinomoDealsAPIMethod(5, (res) => {
-        console.log(res.data.data);
-        setDeals(res.data.data);
-      });
-    } catch (err) {
-      alert(err.response);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await getBinomoDealsAPIMethod(5, (res) => {
+          console.log(res.data.data);
+          setDeals(res.data.data);
+        });
+      } catch (err) {
+        alert(err.response);
+      }
     }
+    fetchData();
   }, []);
 
   return (
@@ -119,9 +121,8 @@ export default function UserDashboard() {
                 }}
                 disableRipple={true}
                 disableFocusRipple={true}
-                edge="false"
+                edge={false}
               >
-
                 <EqualizerOutlinedIcon
                   style={{
                     zIndex: "2",
@@ -197,12 +198,13 @@ export default function UserDashboard() {
           justifyContent: "space-between",
         }}
       >
-        {deals.map((el) => (
+        {deals.map((el, index) => (
           <TransactionCard
             name={el.asset_name}
             amount={el.amount}
             return={el.win}
             status={el.status}
+            key={index}
           />
         ))}
       </Box>

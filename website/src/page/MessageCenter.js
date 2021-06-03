@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Sidebar from "../components/SideBar";
 import UserHeader from "../components/userHeader";
 
@@ -6,13 +6,7 @@ import UserHeader from "../components/userHeader";
 import UserMessageCenter from "../components/MessageCenter SubComp/UserMessageCenter";
 import AdminMessageCenter from "../components/MessageCenter SubComp/AdminMessageCenter";
 
-import {
-  Grid,
-  Paper,
-  makeStyles,
-  withStyles,
-  Container,
-} from "@material-ui/core";
+import { Grid, Paper, makeStyles } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -39,8 +33,6 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function ContactUserVAdmin() {
-  const localUser = JSON.parse(localStorage.getItem("isAdmin"));
-  const [isAdmin, setIsAdmin] = useState(localUser);
   const classes = styles();
   return (
     <Grid container alignItems="center" className={classes.root}>
@@ -48,7 +40,11 @@ export default function ContactUserVAdmin() {
       <Grid item className={classes.rightbar}>
         <Paper className={classes.rightContainer}>
           <UserHeader page=" Notifications" />
-          {isAdmin ? <AdminMessageCenter /> : <UserMessageCenter />}
+          {JSON.parse(localStorage.getItem("isAdmin")) ? (
+            <AdminMessageCenter />
+          ) : (
+            <UserMessageCenter />
+          )}
         </Paper>
       </Grid>
     </Grid>

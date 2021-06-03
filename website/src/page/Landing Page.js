@@ -70,7 +70,7 @@ const Landing = () => {
           style={{ justifyContent: "space-between" }}
           className={classes.innerContainer}
         >
-          <Grid item justifyContent="flex-start">
+          <Grid item>
             <Box
               display="flex"
               style={{

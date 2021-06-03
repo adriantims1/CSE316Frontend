@@ -129,7 +129,7 @@ const Contact = () => {
               Contact Us
             </Typography>
           </Grid>
-          <Grid item style={{ width: "50%" }} direction="column">
+          <Grid item style={{ width: "50%" }}>
             <TextField
               placeholder="John Doe"
               label="Name"

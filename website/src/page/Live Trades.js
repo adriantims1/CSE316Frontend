@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import ResultCard from "../components/ResultCard";
 import { Paper, makeStyles, Grid, Typography, Box } from "@material-ui/core";
-import useWebSocket from "react-use-websocket";
+//import useWebSocket from "react-use-websocket";
 import Chart from "react-apexcharts";
 import ApexCharts from "apexcharts";
 import axios from "axios";
@@ -38,7 +38,7 @@ const styles = makeStyles((theme) => ({
 
 const Live = () => {
   const [transHistory, setTransHistory] = useState([]);
-  const [price, setCurrPrice] = useState(0);
+  //const [price, setCurrPrice] = useState(0);
   const fetchBinProfile = async () => {
     try {
       var temp = await axios.get("/api/binProfile/");
@@ -69,7 +69,7 @@ const Live = () => {
       clearInterval(b);
     };
   }, []);
-  const [state, setState] = useState({
+  const [state] = useState({
     series: [
       {
         data: [0, 0, 0, 0, 0],
@@ -118,18 +118,9 @@ const Live = () => {
       },
     },
   });
-  let intervalID;
-  /*useEffect(async () => {
-    intervalID = 
-    return () => {
-      console.log("testing");
-      clearInterval(intervalID);
-    };
-  });*/
-
   const classes = styles();
 
-  const { sendJsonMessage } = useWebSocket("wss://as.binomo.com/", {
+  /*const { sendJsonMessage } = useWebSocket("wss://as.binomo.com/", {
     onOpen: () => {
       sendJsonMessage({ action: "subscribe", rics: ["Z-CRY/IDX"] });
     },
@@ -140,7 +131,7 @@ const Live = () => {
         setCurrPrice(e.data[0].assets[0].rate);
       }
     },
-  });
+  });*/
 
   return (
     <>

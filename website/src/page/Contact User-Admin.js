@@ -6,13 +6,7 @@ import UserHeader from "../components/userHeader";
 import ContactUser from "../components/SendMessage SubComp/adminSendMessage";
 import ContactAdmin from "../components/SendMessage SubComp/userSendMessage";
 
-import {
-  Grid,
-  Paper,
-  makeStyles,
-  withStyles,
-  Container,
-} from "@material-ui/core";
+import { Grid, Paper, makeStyles, Container } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -40,7 +34,7 @@ const styles = makeStyles((theme) => ({
 
 export default function ContactUserVAdmin() {
   const localUser = JSON.parse(localStorage.getItem("isAdmin"));
-  const [isAdmin, setIsAdmin] = useState(localUser);
+  const [isAdmin] = useState(localUser);
   const classes = styles();
   return (
     <Grid container alignItems="center" className={classes.root}>

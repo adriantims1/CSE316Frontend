@@ -1455,7 +1455,7 @@
     "@types/yargs" "^15.0.0"
     "chalk" "^4.0.0"
 
-"@material-ui/core@^4.11.4", "@material-ui/core@^4.9.12 || ^5.0.0-alpha.22":
+"@material-ui/core@^4.11.4":
   "integrity" "sha512-oqb+lJ2Dl9HXI9orc6/aN8ZIAMkeThufA5iZELf2LQeBn2NtjVilF5D2w7e9RpntAzDb4jK5DsVhkfOvFY/8fg=="
   "resolved" "https://registry.npmjs.org/@material-ui/core/-/core-4.11.4.tgz"
   "version" "4.11.4"
@@ -9595,6 +9595,11 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
   "version" "17.0.1"
 
+"react-masonry-css@^1.0.16":
+  "integrity" "sha512-KSW0hR2VQmltt/qAa3eXOctQDyOu7+ZBevtKgpNDSzT7k5LA/0XntNa9z9HKCdz3QlxmJHglTZ18e4sX4V8zZQ=="
+  "resolved" "https://registry.npmjs.org/react-masonry-css/-/react-masonry-css-1.0.16.tgz"
+  "version" "1.0.16"
+
 "react-refresh@^0.8.3":
   "integrity" "sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg=="
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
@@ -9710,7 +9715,7 @@
   "resolved" "https://registry.npmjs.org/react-use-websocket/-/react-use-websocket-2.7.1.tgz"
   "version" "2.7.1"
 
-"react@^17.0.0", "react@^17.0.2":
+"react@^17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

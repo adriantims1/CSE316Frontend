@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../SideBar";
+import Sidebar from "../components/SideBar";
 import Chart from "react-apexcharts";
+
 import { Grid, Paper, makeStyles, Container } from "@material-ui/core";
-import UserHeader from "../userHeader";
-import { getBinomoDealsAPIMethod } from "../../api/profileClient";
+
+import UserHeader from "../components/userHeader";
+import { getBinomoDealsAPIMethod } from "../api/profileClient";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -59,38 +61,31 @@ export default function MessageCenter() {
       data: [],
     },
   ]);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        if (!localStorage.getItem("graphData")) {
-          var data = await getBinomoDealsAPIMethod(90);
-          data = data.data;
-          localStorage.setItem("graphData", JSON.stringify(data));
-        }
-        var temp = localStorage.getItem("graphData");
-        var arrCandle = [0];
-        temp = JSON.parse(temp).data;
-        temp.forEach((el) => {
-          arrCandle.push(
-            (
-              arrCandle[arrCandle.length - 1] -
-              el.amount / 100 +
-              el.win / 100
-            ).toFixed(2)
-          );
-        });
-        console.log(arrCandle);
-        setSeries([
-          {
-            name: "Data-1",
-            data: arrCandle,
-          },
-        ]);
-      } catch (err) {
-        alert("Error found");
-      }
+  useEffect(async () => {
+    if (!localStorage.getItem("graphData")) {
+      var data = await getBinomoDealsAPIMethod(90);
+      data = data.data;
+      localStorage.setItem("graphData", JSON.stringify(data));
     }
-    fetchData();
+    var temp = localStorage.getItem("graphData");
+    var arrCandle = [0];
+    temp = JSON.parse(temp).data;
+    temp.forEach((el) => {
+      arrCandle.push(
+        (
+          arrCandle[arrCandle.length - 1] -
+          el.amount / 100 +
+          el.win / 100
+        ).toFixed(2)
+      );
+    });
+    console.log(arrCandle);
+    setSeries([
+      {
+        name: "Data-1",
+        data: arrCandle,
+      },
+    ]);
   }, []);
   const classes = styles();
   return (

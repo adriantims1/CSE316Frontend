@@ -69,7 +69,7 @@ const StyledButton = withStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
-  const [active, setActive] = useState(0);
+
   const [login, setLogin] = useState(false);
   const history = useHistory();
   return (

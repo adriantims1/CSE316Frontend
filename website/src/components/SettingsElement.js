@@ -144,7 +144,6 @@ export default function SettingsElement() {
             <NativeSelect
               value={timeframe}
               onChange={handleTimeFrame}
-              InputProps={{ startAdornment: "$" }}
               label="Enter Amount: "
             >
               <option value={1}>1 min</option>

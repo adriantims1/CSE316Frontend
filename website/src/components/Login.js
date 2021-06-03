@@ -33,19 +33,6 @@ const LoginButton = withStyles((theme) => ({
   },
 }))(Button);
 
-const StyledButton = withStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.secondary.main,
-    color: "white",
-    width: "30%",
-    alignSelf: "center",
-    zIndex: theme.zIndex.drawer + 2,
-  },
-  label: {
-    textTransform: "capitalize",
-  },
-}))(Button);
-
 function Login() {
   const [login, setLogin] = useState(true);
   const classes = styles();

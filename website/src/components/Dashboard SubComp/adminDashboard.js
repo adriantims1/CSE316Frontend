@@ -91,39 +91,43 @@ export default function AdminDashboard() {
   ];
   const [rows, setRows] = useState([]);
   const classes = styles();
-  useEffect(async () => {
-    try {
-      await adminLoginAPIMethod(
-        {
-          email: "maggot@tribalks.com",
-          password: "sunykorea",
-        },
-        async (res) => {
-          await getAllUsersAPIMethod((res) => {
-            console.log(res.data.data); //console log all users
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await adminLoginAPIMethod(
+          {
+            email: "maggot@tribalks.com",
+            password: "sunykorea",
+          },
+          async (res) => {
+            await getAllUsersAPIMethod((res) => {
+              console.log(res.data.data); //console log all users
 
-            localStorage.setItem('users', JSON.stringify(res.data.data.users)); //stringify object and store
+              localStorage.setItem(
+                "users",
+                JSON.stringify(res.data.data.users)
+              ); //stringify object and store
 
-            var temp = [];
-            res.data.data.users.forEach((el, index) => {
-              temp.push({
-                id: el._id,
-                name: el.name,
-                email: el.email,
-                joinedDate: el.joinedDate,
-                type: el.accountType,
+              var temp = [];
+              res.data.data.users.forEach((el, index) => {
+                temp.push({
+                  id: el._id,
+                  name: el.name,
+                  email: el.email,
+                  joinedDate: el.joinedDate,
+                  type: el.accountType,
+                });
               });
+              setRows(temp);
             });
-            setRows(temp);
-
-
-          });
-        }
-      );
-    } catch (err) {
-      console.log(err);
-      alert(err.response);
+          }
+        );
+      } catch (err) {
+        console.log(err);
+        alert(err.response);
+      }
     }
+    fetchData();
   }, []);
   return (
     <>

@@ -1,15 +1,12 @@
 import React from "react";
 import HomeIcon from "@material-ui/icons/Home";
-import SecurityIcon from "@material-ui/icons/Security";
 import PaymentIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { NavLink } from "react-router-dom";
 import { IconButton, makeStyles } from "@material-ui/core";
-import ContactMailIcon from '@material-ui/icons/ContactMail';
-import ForumIcon from '@material-ui/icons/Forum';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
-
-
+import ContactMailIcon from "@material-ui/icons/ContactMail";
+import ForumIcon from "@material-ui/icons/Forum";
+import ShowChartIcon from "@material-ui/icons/ShowChart";
 
 const styles = makeStyles((theme) => ({
   active: {
@@ -60,8 +57,6 @@ export default function userSidebar() {
           <ShowChartIcon className={classes.icons} />
         </IconButton>
       </NavLink>
-      
-
     </>
   );
 }

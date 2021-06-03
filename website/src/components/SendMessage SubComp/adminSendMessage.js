@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormControl from '@material-ui/core/FormControl'
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 
-
-
-import {
-  makeStyles,
-  withStyles,
-  Snackbar,
-} from "@material-ui/core";
+import { makeStyles, withStyles, Snackbar } from "@material-ui/core";
 import { NotifyAPIMethod } from "../../api/adminClient";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -25,7 +18,7 @@ const styles = makeStyles((theme) => ({
   field: {
     marginTop: 20,
     marginBottom: 20,
-    display: 'block'
+    display: "block",
   },
 }));
 
@@ -42,21 +35,13 @@ const StyledButton = withStyles((theme) => ({
 }))(Button);
 
 export default function MessageCenter() {
-
-  useEffect(async () => {
-    try {
-
-    } catch (err) {
-      alert(err.response);
-    }
-  }, []);
   const classes = styles();
 
-  const [title, setTitle] = useState('')
-  const [details, setDetails] = useState('')
-  const [titleError, setTitleError] = useState(false)
-  const [detailsError, setDetailsError] = useState(false)
-  const [category, setCategory] = useState('money')
+  const [title, setTitle] = useState("");
+  const [details, setDetails] = useState("");
+  const [titleError, setTitleError] = useState(false);
+  const [detailsError, setDetailsError] = useState(false);
+  const [category, setCategory] = useState("money");
   const [open, setOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [status, setStatus] = useState("");
@@ -69,34 +54,36 @@ export default function MessageCenter() {
         if (!details) setDetailsError(true);
         return;
       }
-      setTitleError(false)
-      setDetailsError(false)
+      setTitleError(false);
+      setDetailsError(false);
 
-      if (title == '') {
-        setTitleError(true)
+      if (title === "") {
+        setTitleError(true);
       }
-      if (details == '') {
-        setDetailsError(true)
+      if (details === "") {
+        setDetailsError(true);
       }
       if (title && details) {
-        console.log(localStorage.getItem("name"), localStorage.getItem("email"), title, details);
+        console.log(
+          localStorage.getItem("name"),
+          localStorage.getItem("email"),
+          title,
+          details
+        );
         await NotifyAPIMethod({
           Date: new Date(),
           Title: category + " : " + title,
           Notice: details,
-
         });
         onClick_send(e);
       }
-    }
-    catch (err) {
+    } catch (err) {
       console.log("FrontEnd: ", err);
       setSnackbarMessage(err.response);
       setStatus("error");
       setOpen(true);
     }
   };
-
 
   const handleClose = (e, reason) => {
     if (reason === "clickaway") {
@@ -111,7 +98,8 @@ export default function MessageCenter() {
   };
   return (
     <form noValidate onSubmit={handleSubmit}>
-      <TextField className={classes.field}
+      <TextField
+        className={classes.field}
         onChange={(e) => setTitle(e.target.value)}
         label="Notification Title"
         variant="outlined"
@@ -120,7 +108,8 @@ export default function MessageCenter() {
         required
         error={titleError}
       />
-      <TextField className={classes.field}
+      <TextField
+        className={classes.field}
         onChange={(e) => setDetails(e.target.value)}
         label="Details"
         variant="outlined"
@@ -133,14 +122,29 @@ export default function MessageCenter() {
       />
       <FormControl className={classes.field}>
         {/* <FormLabel>Notification Category</FormLabel> */}
-        <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
-          <FormControlLabel value="URGENT*" control={<Radio />} label="URGENT*" />
-          <FormControlLabel value="Daily reminders" control={<Radio />} label="Daily reminders" />
-          <FormControlLabel value="Monthly notice" control={<Radio />} label="Monthly notice" />
+        <RadioGroup
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <FormControlLabel
+            value="URGENT*"
+            control={<Radio />}
+            label="URGENT*"
+          />
+          <FormControlLabel
+            value="Daily reminders"
+            control={<Radio />}
+            label="Daily reminders"
+          />
+          <FormControlLabel
+            value="Monthly notice"
+            control={<Radio />}
+            label="Monthly notice"
+          />
         </RadioGroup>
       </FormControl>
 
-      <StyledButton type="submit" >Send</StyledButton>
+      <StyledButton type="submit">Send</StyledButton>
 
       <Snackbar
         open={open}
@@ -155,5 +159,3 @@ export default function MessageCenter() {
     </form>
   );
 }
-
-

@@ -29,9 +29,7 @@ const styles = makeStyles((theme) => ({
 export default function SideBar() {
   const classes = styles();
   const history = useHistory();
-  const [isAdmin, setIsAdmin] = useState(
-    JSON.parse(localStorage.getItem("isAdmin"))
-  );
+  const [isAdmin] = useState(JSON.parse(localStorage.getItem("isAdmin")));
   const onClick_logout = async () => {
     try {
       LogoutAPIMethod();
@@ -48,7 +46,7 @@ export default function SideBar() {
         className={`${classes.sidebar} ${classes.sidebarContent}`}
       >
         <a
-          href=""
+          href="/"
           onClick={(e) => {
             e.preventDefault();
             history.push("/");
@@ -57,6 +55,7 @@ export default function SideBar() {
           <img
             src="https://res.cloudinary.com/dtkgfy2wk/image/upload/v1620954709/logo_fuhdgl.svg"
             style={{ height: "75px", width: "100px" }}
+            alt="Company Logo"
           ></img>
         </a>
       </Box>

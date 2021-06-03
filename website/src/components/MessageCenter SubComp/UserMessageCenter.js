@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  makeStyles,
-  Container,
-} from "@material-ui/core";
+import { makeStyles, Container } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import { getAllNotificationsAPIMethod } from "../../api/generalClient";
 
@@ -38,24 +35,27 @@ export default function MessageCenter() {
   ];
   const [rows, setRows] = useState([]);
 
-  useEffect(async () => {
-    try {
-      getAllNotificationsAPIMethod((res) => {
-        var temp = [];
-        res.data.data.infos.forEach((el) => {
-          temp.push({
-            id: el._id,
-            date: el.Date,
-            title: el.Title,
-            message: el.Notice,
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        getAllNotificationsAPIMethod((res) => {
+          var temp = [];
+          res.data.data.infos.forEach((el) => {
+            temp.push({
+              id: el._id,
+              date: el.Date,
+              title: el.Title,
+              message: el.Notice,
+            });
           });
+          setRows(temp);
+          console.log("Printing here", temp);
         });
-        setRows(temp);
-        console.log("Printing here", temp);
-      });
-    } catch (err) {
-      alert(err.response);
+      } catch (err) {
+        alert(err.response);
+      }
     }
+    fetchData();
   }, []);
   const classes = styles();
   return (
@@ -63,5 +63,4 @@ export default function MessageCenter() {
       <DataGrid rows={rows} columns={columns} pageSize={10} />
     </Container>
   );
-
 }

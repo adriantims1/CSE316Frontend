@@ -28,11 +28,8 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Dashboard() {
-  const [isAdmin, setIsAdmin] = useState(
-    JSON.parse(localStorage.getItem("isAdmin"))
-  );
+  const [isAdmin] = useState(JSON.parse(localStorage.getItem("isAdmin")));
   const [executed, setExecuted] = useState(false);
   const classes = styles();
   var doOnce = () => {
@@ -43,20 +40,28 @@ export default function Dashboard() {
   };
   doOnce();
 
-  useEffect(async () => {
-    try {
-      await getBinomoDealsAPIMethod(10, (res) => {
-        let won = 0;
-        let loss = 0;
-        let tie = 0;
-        (res.data.data).forEach(element => (element.status == "won") ? won = won + 1 : ((element.status == "lost") ? loss = loss + 1 : tie = tie + 1));
-        localStorage.setItem("seriesD", [won, loss, tie]);
-      });
-    } catch (err) {
-      alert(err.response);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await getBinomoDealsAPIMethod(10, (res) => {
+          let won = 0;
+          let loss = 0;
+          let tie = 0;
+          res.data.data.forEach((element) =>
+            element.status === "won"
+              ? (won = won + 1)
+              : element.status === "lost"
+              ? (loss = loss + 1)
+              : (tie = tie + 1)
+          );
+          localStorage.setItem("seriesD", [won, loss, tie]);
+        });
+      } catch (err) {
+        alert(err.response);
+      }
     }
+    fetchData();
   }, []);
-
 
   return (
     <Grid container alignItems="center" className={classes.root}>

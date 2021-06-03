@@ -16,7 +16,6 @@ import {
   changeProfileAPIMethod,
   changePasswordAPIMethod,
   checkPasswordAPIMethod,
-  getprofileurlAPIMethod,
 } from "../api/profileClient";
 
 const styles = makeStyles((theme) => ({
@@ -167,6 +166,7 @@ export default function ProfileElement(props) {
                 marginRight: "24px",
                 borderRadius: "50%",
               }}
+              alt="user profile"
             ></img>
             <input
               type="file"

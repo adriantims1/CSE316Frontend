@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Box, makeStyles } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import { getprofileurlAPIMethod } from "../api/profileClient";
 
 const styles = makeStyles((theme) => ({
   profileName: {
@@ -27,17 +26,15 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function UserHeader(props) {
-  const [name, set_name] = useState(localStorage.getItem("name").toUpperCase());
-  const [accountType, set_accountType] = useState(
-    localStorage.getItem("accountType")
-  );
+  const [name] = useState(localStorage.getItem("name").toUpperCase());
+  const [accountType] = useState(localStorage.getItem("accountType"));
   const [profile_url, setProfile_url] = useState(
     localStorage.getItem("profile_url")
   );
 
   useEffect(() => {
     setProfile_url(localStorage.getItem("profile_url"));
-  }, [localStorage.getItem("profile_url")]);
+  }, []);
 
   const classes = styles();
   return (
@@ -60,6 +57,7 @@ export default function UserHeader(props) {
               margin: "8px 24px 8px 0",
               borderRadius: "50%",
             }}
+            alt="user profile"
           ></img>
         </NavLink>
 
