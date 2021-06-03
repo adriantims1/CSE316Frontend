@@ -44,8 +44,8 @@ export default function ContactUserVAdmin() {
   let month = {};
   (users).forEach(element => (month[new Date(element.joinedDate).getMonth()]) ? month[new Date(element.joinedDate).getMonth()] += 1 : month[new Date(element.joinedDate).getMonth()] = 1);
   let monthCategories = ["Jan", "Feb", "Mar",];
-  let monthData = [8, 7, 9];
-  let MonthLst = ['0', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  let monthData = [4, 2, 6];
+  let MonthLst = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   Object.keys(month).forEach(element => {
     monthCategories.push(MonthLst[element])
     monthData.push(month[element])

@@ -104,7 +104,7 @@ export default function PaymentElement() {
           </Box>
         }
         label={
-          <Typography className={classes.fontSeparator}>Acount No.</Typography>
+          <Typography className={classes.fontSeparator}>Account No.</Typography>
         }
         labelPlacement="start"
       />
