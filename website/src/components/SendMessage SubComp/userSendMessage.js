@@ -74,7 +74,7 @@ export default function MessageCenter() {
         await ContactUsInfoAPIMethod({
           name: localStorage.getItem("name"),
           email: localStorage.getItem("email"),
-          Date: Date.now(),
+          date: Date.now(),
           message: title + " : " + details,
         });
         onClick_send(e);

@@ -5,9 +5,10 @@ import {
   Grid,
   Button,
   withStyles,
-  
+
 } from "@material-ui/core";
-import { signUpAPIInfo } from "../api/generalClient";
+import { signUpAPIInfo, LoginAPIMethod } from "../api/generalClient";
+import { getprofileurlAPIMethod, changeProfileAPIMethod } from "../api/profileClient";
 
 const StyledButton = withStyles((theme) => ({
   root: {
@@ -41,13 +42,46 @@ export default function LoginForm() {
     setPass(e.target.value);
   };
 
+  const sendLoginInfo = async (e) => {
+    try {
+      await LoginAPIMethod({ email: email, password: pass }, async (res) => {
+        localStorage.setItem("balance", res.data.data.balance);
+        await getprofileurlAPIMethod((res) => {
+          console.log(res.data.data);
+          localStorage.setItem("accountType", res.data.data.accountType);
+          localStorage.setItem("name", res.data.data.name);
+          localStorage.setItem("profile_url", res.data.data.profile_url);
+          localStorage.setItem(
+            "setting",
+            JSON.stringify(res.data.data.setting)
+          );
+          localStorage.setItem("isAdmin", res.data.data.isAdmin);
+          localStorage.setItem("email", res.data.data.email);
+          history.push(`/dashboard`);
+        });
+      });
+
+      await changeProfileAPIMethod({
+        balance: localStorage.getItem("balance"),
+      });
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const sendSignUpInfo = (e) => {
     console.log("Signing up for: ", email);
     try {
       signUpAPIInfo({ name: name, email: email, password: pass }, (res) => {
         console.log(res);
+        if (res.data.data.message) {
+          alert(res.data.data.message);
+        }
+        else {
+          sendLoginInfo()
+        }
       });
-      history.push(`/dashboard`);
     } catch (err) {
       alert(err.response);
     }

@@ -86,50 +86,37 @@ export default function ProfileElement(props) {
   const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
   };
+  const handleSnackbarClose = (e) => {
+    setOpen(false);
+  };
 
+
+  // Password change handler
 
   const onClickSave = async (e) => {
     try {
-      if (oldPassword === "") {
-        console.log("profile pic change", oldPassword);
-        if (email) {
-          changeProfileAPIMethod({
-            email: email,
-            profile_url: picture,
-          });
-        } else {
-          changeProfileAPIMethod({
-            profile_url: picture,
-          });
-        }
-        setSuccess("success");
+      const currPassword = await checkPasswordAPIMethod({
+        password: oldPassword,
+      });
+      if (!currPassword.data.success) {
+        setSuccess("warning");
         setOpen(true);
-        setSnackBarMessage("Profile Updated");
+        setSnackBarMessage("Wrong old password");
+        return;
       }
-      else {
-        const currPassword = await checkPasswordAPIMethod({
-          password: oldPassword,
+      if (confirmPassword !== newPassword) {
+        setSuccess("warning");
+        setOpen(true);
+        setSnackBarMessage("Confirm your password");
+        return;
+      }
+      if (newPassword)
+        changePasswordAPIMethod({
+          password: newPassword,
         });
-        if (!currPassword.data.success) {
-          setSuccess("warning");
-          setOpen(true);
-          setSnackBarMessage("Wrong old password");
-          return;
-        }
-        if (confirmPassword !== newPassword) {
-          setSuccess("warning");
-          setOpen(true);
-          setSnackBarMessage("Confirm your password");
-          return;
-        }
-        if (newPassword)
-          changePasswordAPIMethod({
-            password: newPassword,
-          });
-        setSuccess("success");
-        setOpen(true);
-        setSnackBarMessage("Profile Updated");
-      }
+      setSuccess("success");
+      setOpen(true);
+      setSnackBarMessage("Profile Updated");
     }
     catch (err) {
       setSuccess("error");
@@ -138,36 +125,46 @@ export default function ProfileElement(props) {
     }
 
   };
+  // Profile picture change handler
+  const handlePhotoChange = async(e) => {
+    try {
+      const selectedFile = e.target.files[0];
+      const t = selectedFile.type.split("/").pop().toLowerCase();
+      if (
+        t !== "jpg" &&
+        t !== "jpeg" &&
+        t !== "png" &&
+        t !== "bmp" &&
+        t !== "gif"
+      ) {
+        alert("Enter valid file");
+        return;
+      }
+      const formData = new FormData();
+      formData.append("upload_preset", "ckgxxhz4");
+      formData.append("file", selectedFile);
+      await uploadImageToCloudinaryAPIMethod(formData, (res) => {
+        setPicture(res.url);
+        props.setProfilePicture(res.url);
+        console.log(res.url);
+        localStorage.setItem("profile_url", res.url);
 
-  const handleSnackbarClose = (e) => {
-    setOpen(false);
-  };
-
-  const handlePhotoChange = (e) => {
-    const selectedFile = e.target.files[0];
-    const t = selectedFile.type.split("/").pop().toLowerCase();
-    if (
-      t !== "jpg" &&
-      t !== "jpeg" &&
-      t !== "png" &&
-      t !== "bmp" &&
-      t !== "gif"
-    ) {
-      alert("Enter valid file");
-      return;
+      });
+      await changeProfileAPIMethod({
+        profile_url: picture,
+      });
+      setSuccess("success");
+      setOpen(true);
+      setSnackBarMessage("Profile picture Updated");
     }
-    const formData = new FormData();
-    formData.append("upload_preset", "ckgxxhz4");
-    formData.append("file", selectedFile);
-    uploadImageToCloudinaryAPIMethod(formData, (res) => {
-      setPicture(res.url);
-      props.setProfilePicture(res.url);
-      console.log(res.url);
-      localStorage.setItem("profile_url", res.url);
-
-    });
-
+    catch (err) {
+      setSuccess("error");
+      setOpen(true);
+      setSnackBarMessage("Fail to Update");
+    }
   };
+
+
   return (
     <>
       <FormControlLabel
