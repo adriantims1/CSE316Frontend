@@ -60,7 +60,7 @@ const MatDelete = ({ index }) => {
   );
 };
 
-export default function AdminDashboard() {
+export default function AdminDashboard(props) {
   const columns = [
     { field: "id", headerName: "Id", width: 250 },
     { field: "name", headerName: "Name", width: 250 },
@@ -96,8 +96,8 @@ export default function AdminDashboard() {
       try {
         await adminLoginAPIMethod(
           {
-            email: "maggot@tribalks.com",
-            password: "sunykorea",
+            email: localStorage.getItem("email"),
+            password: props.pass,
           },
           async (res) => {
             await getAllUsersAPIMethod((res) => {

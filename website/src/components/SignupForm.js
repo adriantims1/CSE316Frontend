@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import * as email_validator from "email-validator"
 import {
   TextField,
   Grid,
@@ -23,7 +24,7 @@ const StyledButton = withStyles((theme) => ({
   },
 }))(Button);
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -46,6 +47,7 @@ export default function LoginForm() {
     try {
       await LoginAPIMethod({ email: email, password: pass }, async (res) => {
         localStorage.setItem("balance", res.data.data.balance);
+        props.setPass(pass);
         await getprofileurlAPIMethod((res) => {
           console.log(res.data.data);
           localStorage.setItem("accountType", res.data.data.accountType);
@@ -57,6 +59,7 @@ export default function LoginForm() {
           );
           localStorage.setItem("isAdmin", res.data.data.isAdmin);
           localStorage.setItem("email", res.data.data.email);
+
           history.push(`/dashboard`);
         });
       });
@@ -72,7 +75,11 @@ export default function LoginForm() {
 
   const sendSignUpInfo = (e) => {
     console.log("Signing up for: ", email);
+
     try {
+      if (!email_validator.validate(email)) {
+        throw new Error("Invalid email!")
+      }
       signUpAPIInfo({ name: name, email: email, password: pass }, (res) => {
         console.log(res);
         if (res.data.data.message) {
@@ -83,7 +90,7 @@ export default function LoginForm() {
         }
       });
     } catch (err) {
-      alert(err.response);
+      alert(err);
     }
   };
 

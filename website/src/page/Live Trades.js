@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../components/NavBar";
-import ResultCard from "../components/ResultCard";
 import { Paper, makeStyles, Grid, Typography, Box } from "@material-ui/core";
 //import useWebSocket from "react-use-websocket";
 import Chart from "react-apexcharts";
@@ -165,7 +163,7 @@ const Live = () => {
 
   return (
     <>
-      <NavBar />
+
       <Paper elevation={0} className={classes.bodyContainer}>
         <Grid
           container

@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/NavBar";
 import { Box, makeStyles, Grid, Typography } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
@@ -27,7 +26,7 @@ const About = () => {
   const classes = styles();
   return (
     <>
-      <Navbar />
+   
       <Box
         display="flex"
         style={{

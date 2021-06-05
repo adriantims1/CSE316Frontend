@@ -55,7 +55,7 @@ const Landing = () => {
   const classes = styles();
   return (
     <>
-      <Navbar />
+     
       <Box
         display="flex"
         style={{

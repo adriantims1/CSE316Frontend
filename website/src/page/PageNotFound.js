@@ -1,11 +1,10 @@
 import React from "react";
-import Navbar from "../components/NavBar";
 import { Box } from "@material-ui/core";
 
 function PageNotFound() {
   return (
     <>
-      <Navbar />
+
       <Box
         display="flex"
         style={{

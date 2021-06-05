@@ -27,35 +27,37 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function MessageCenter() {
+export default function MessageCenter(props) {
   const columns = [
     { field: "date", headerName: "Date", width: 250 },
     { field: "title", headerName: "Title", width: 350 },
     { field: "message", headerName: "Message", width: 650, sortable: false },
   ];
   const [rows, setRows] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        getAllNotificationsAPIMethod((res) => {
-          var temp = [];
-          res.data.data.infos.forEach((el) => {
-            temp.push({
-              id: el._id,
-              date: el.Date,
-              title: el.Title,
-              message: el.Notice,
-            });
+  async function fetchData() {
+    try {
+      getAllNotificationsAPIMethod((res) => {
+        var temp = [];
+        res.data.data.infos.forEach((el) => {
+          temp.push({
+            id: el._id,
+            date: el.Date,
+            title: el.Title,
+            message: el.Notice,
           });
-          setRows(temp);
-          console.log("Printing here", temp);
         });
-      } catch (err) {
-        alert(err.response);
-      }
+        setRows(temp);
+        console.log("Printing here", temp);
+      });
+    } catch (err) {
+      alert(err.response);
     }
+  }
+  useEffect(() => {
+
     fetchData();
+    props.socket.on('userNotification', fetchData);
+
   }, []);
   const classes = styles();
   return (

@@ -5,10 +5,12 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-
 import { makeStyles, withStyles, Snackbar } from "@material-ui/core";
 import { NotifyAPIMethod } from "../../api/adminClient";
 import MuiAlert from "@material-ui/lab/Alert";
+// import { io } from "socket.io-client";
+// var socket = io.connect('http://localhost:5000');
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -34,7 +36,7 @@ const StyledButton = withStyles((theme) => ({
   },
 }))(Button);
 
-export default function MessageCenter() {
+export default function MessageCenter(props) {
   const classes = styles();
 
   const [title, setTitle] = useState("");
@@ -71,6 +73,11 @@ export default function MessageCenter() {
           details
         );
         await NotifyAPIMethod({
+          Date: new Date(),
+          Title: category + " : " + title,
+          Notice: details,
+        });
+        props.socket.emit('notification', {
           Date: new Date(),
           Title: category + " : " + title,
           Notice: details,

@@ -24,7 +24,7 @@ const StyledButton = withStyles((theme) => ({
   },
 }))(Button);
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [open, setOpen] = useState(false);
@@ -47,6 +47,7 @@ export default function LoginForm() {
     try {
       await LoginAPIMethod({ email: email, password: pass }, async (res) => {
         localStorage.setItem("balance", res.data.data.balance);
+        props.setPass(pass);
         await getprofileurlAPIMethod((res) => {
           console.log(res.data.data);
           localStorage.setItem("accountType", res.data.data.accountType);

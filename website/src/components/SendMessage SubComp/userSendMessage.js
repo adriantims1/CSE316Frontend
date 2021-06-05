@@ -35,7 +35,7 @@ const StyledButton = withStyles((theme) => ({
   },
 }))(Button);
 
-export default function MessageCenter() {
+export default function MessageCenter(props) {
   const classes = styles();
 
   const [title, setTitle] = useState("");
@@ -72,6 +72,12 @@ export default function MessageCenter() {
           details
         );
         await ContactUsInfoAPIMethod({
+          name: localStorage.getItem("name"),
+          email: localStorage.getItem("email"),
+          date: Date.now(),
+          message: title + " : " + details,
+        });
+        props.socket.emit('message', {
           name: localStorage.getItem("name"),
           email: localStorage.getItem("email"),
           date: Date.now(),

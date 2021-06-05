@@ -32,7 +32,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContactUserVAdmin() {
+export default function ContactUserVAdmin({socket}) {
   const classes = styles();
   return (
     <Grid container alignItems="center" className={classes.root}>
@@ -41,9 +41,9 @@ export default function ContactUserVAdmin() {
         <Paper className={classes.rightContainer}>
           <UserHeader page=" Notifications" />
           {JSON.parse(localStorage.getItem("isAdmin")) ? (
-            <AdminMessageCenter />
+            <AdminMessageCenter socket={socket}/>
           ) : (
-            <UserMessageCenter />
+            <UserMessageCenter socket={socket}/>
           )}
         </Paper>
       </Grid>

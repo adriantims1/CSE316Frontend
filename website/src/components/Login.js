@@ -33,7 +33,7 @@ const LoginButton = withStyles((theme) => ({
   },
 }))(Button);
 
-function Login() {
+function Login(props) {
   const [login, setLogin] = useState(true);
   const classes = styles();
   return (
@@ -59,9 +59,9 @@ function Login() {
       </Box>
       <Grid container direction="column" justify="center" alignItems="center">
         {login ? (
-          <LoginForm style={{ alignSelf: "center" }} />
+          <LoginForm style={{ alignSelf: "center" }} setPass={props.setPass} />
         ) : (
-          <SignupForm style={{ alignSelf: "center" }} />
+          <SignupForm style={{ alignSelf: "center" }} setPass={props.setPass} />
         )}
       </Grid>
 

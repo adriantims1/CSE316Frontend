@@ -67,7 +67,7 @@ const StyledButton = withStyles((theme) => ({
   },
 }))(Button);
 
-export default function Navbar() {
+export default function Navbar(props) {
   const classes = useStyles();
   console.log(localStorage.getItem("isLoggedin"));
 
@@ -182,7 +182,7 @@ export default function Navbar() {
               setLogin(false);
             }}
           ></Backdrop>
-          <Login />
+          <Login setPass={props.setPass} />
         </div>
       </Slide>
     </>

@@ -29,7 +29,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   console.log(localStorage.getItem("isAdmin"));
 
   const [isAdmin] = useState(JSON.parse(localStorage.getItem("isAdmin")));
@@ -94,7 +94,7 @@ export default function Dashboard() {
         <Paper className={classes.rightContainer}>
           {(localStorage.getItem("isAdmin") === null) ? sendLoginInfo() : null}
           <UserHeader page="Dashboard" />
-          {isAdmin ? <AdminDashboard /> : <UserDashboard />}
+          {isAdmin ? <AdminDashboard pass={props.pass} /> : <UserDashboard />}
         </Paper>
       </Grid>
     </Grid>

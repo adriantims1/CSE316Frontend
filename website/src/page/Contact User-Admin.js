@@ -32,7 +32,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContactUserVAdmin() {
+export default function ContactUserVAdmin({ socket }) {
   const localUser = JSON.parse(localStorage.getItem("isAdmin"));
   const [isAdmin] = useState(localUser);
   const classes = styles();
@@ -43,7 +43,7 @@ export default function ContactUserVAdmin() {
         <Paper className={classes.rightContainer}>
           <UserHeader page="Send Notification" />
           <Container size="sm">
-            {isAdmin ? <ContactUser /> : <ContactAdmin />}
+            {isAdmin ? <ContactUser socket={socket} /> : <ContactAdmin socket={socket} />}
           </Container>
         </Paper>
       </Grid>

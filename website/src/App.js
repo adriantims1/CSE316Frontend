@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import "./App.css";
 import Landing from "./page/Landing Page";
 import Live from "./page/Live Trades";
@@ -10,14 +12,19 @@ import Settings from "./page/Settings";
 import Profile from "./page/Profile";
 import PageNotFound from "./page/PageNotFound";
 import Statistics from "./page/Statistics";
-
 import MessageCenter from "./page/MessageCenter";
 import ContactUserVAdmin from "./page/Contact User-Admin";
+
+import Navbar from "./components/NavBar";
 import UserTransGraph from "./components/Statistics SubComp/UserTransGraph";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
 import CheckOnline from "./components/CheckOnline";
+
+import { io } from "socket.io-client";
+var socket = io.connect('http://localhost:5000');
+
 
 const theme = createMuiTheme({
   palette: {
@@ -32,6 +39,8 @@ const theme = createMuiTheme({
   },
 });
 function App() {
+  const [pass, setPass] = useState("");
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -49,13 +58,13 @@ function App() {
             <CheckOnline success={<Admin />} isAdminRoute={true} />
           </Route>
           <Route path="/msgcenter">
-            <CheckOnline success={<MessageCenter />} />
+            <CheckOnline success={<MessageCenter socket={socket} />} />
           </Route>
           <Route path="/contactUserVAdmin">
-            <CheckOnline success={<ContactUserVAdmin />} />
+            <CheckOnline success={<ContactUserVAdmin socket={socket} />} />
           </Route>
           <Route path="/dashboard">
-            <CheckOnline success={<Dashboard />} />
+            <CheckOnline success={<Dashboard pass={pass} />} />
           </Route>
           <Route path="/graph">
             <CheckOnline success={<UserTransGraph />} />
@@ -63,12 +72,21 @@ function App() {
           <Route path="/statistics">
             <CheckOnline success={<Statistics />} />
           </Route>
-
-          <Route path="/live" component={Live} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/about" component={About} />
-          <Route exact path="/" component={Landing} />
-          <Route path="*" exact={true} component={PageNotFound} />
+          <Route path="/contact">
+            <Navbar setPass={setPass} /> <Contact socket={socket} />
+          </Route>
+          <Route path="/live">
+            <Navbar setPass={setPass} /> <Live />
+          </Route>
+          <Route path="/about">
+            <Navbar setPass={setPass} /> <About />
+          </Route>
+          <Route exact path="/">
+            <Navbar setPass={setPass} /> <Landing setPass={setPass} />
+          </Route>
+          <Route path="*" exact={true}>
+            <Navbar setPass={setPass} /> <PageNotFound />
+          </Route>
 
         </Switch>
       </div>

@@ -1,7 +1,5 @@
 import { React, useState } from "react";
-import Navbar from "../components/NavBar";
 import { ContactUsInfoAPIMethod } from "../api/generalClient";
-
 import {
   Grid,
   Container,
@@ -14,6 +12,9 @@ import {
 } from "@material-ui/core";
 
 import MuiAlert from "@material-ui/lab/Alert";
+
+// import { io } from "socket.io-client";
+// var socket = io.connect('http://localhost:5000');
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -49,7 +50,7 @@ const StyledButton = withStyles((theme) => ({
   },
 }))(Button);
 
-const Contact = () => {
+const Contact = (props) => {
   const classes = styles();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -94,6 +95,12 @@ const Contact = () => {
         date: Date.now(),
         message: message,
       });
+      props.socket.emit('message', {
+        name: name,
+        email: email,
+        date: Date.now(),
+        message: message
+      });
       onClick_send(e);
     } catch (err) {
       console.log("FrontEnd: ", err);
@@ -109,6 +116,10 @@ const Contact = () => {
     }
     setOpen(false);
   };
+
+
+
+
   const onClick_send = (e) => {
     setSnackbarMessage("Message Sent!");
     setStatus("success");
@@ -116,7 +127,7 @@ const Contact = () => {
   };
   return (
     <>
-      <Navbar />
+     
       <Container className={classes.bodyContainer}>
         <Grid
           container
