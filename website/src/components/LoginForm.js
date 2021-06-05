@@ -49,7 +49,7 @@ export default function LoginForm(props) {
         localStorage.setItem("balance", res.data.data.balance);
         props.setPass(pass);
         await getprofileurlAPIMethod((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           localStorage.setItem("accountType", res.data.data.accountType);
           localStorage.setItem("name", res.data.data.name);
           localStorage.setItem("profile_url", res.data.data.profile_url);
@@ -68,7 +68,7 @@ export default function LoginForm(props) {
       });
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setOpen(true);
     }
   };

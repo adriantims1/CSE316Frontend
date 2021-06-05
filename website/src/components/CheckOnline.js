@@ -15,7 +15,7 @@ export default function CheckOnline(props) {
         ) {
           setState(true);
         } else {
-          console.log("false");
+          // console.log("false");
           setState(false);
           history.push("/");
         }

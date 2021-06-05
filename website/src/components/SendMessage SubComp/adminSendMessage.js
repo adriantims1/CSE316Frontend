@@ -66,12 +66,7 @@ export default function MessageCenter(props) {
         setDetailsError(true);
       }
       if (title && details) {
-        console.log(
-          localStorage.getItem("name"),
-          localStorage.getItem("email"),
-          title,
-          details
-        );
+        // console.log(localStorage.getItem("name"), localStorage.getItem("email"), title, details);
         await NotifyAPIMethod({
           Date: new Date(),
           Title: category + " : " + title,
@@ -85,7 +80,7 @@ export default function MessageCenter(props) {
         onClick_send(e);
       }
     } catch (err) {
-      console.log("FrontEnd: ", err);
+      // console.log("FrontEnd: ", err);
       setSnackbarMessage(err.response);
       setStatus("error");
       setOpen(true);

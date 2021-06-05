@@ -44,7 +44,7 @@ const Live = () => {
       var temp2 = [];
       var resMax,
         resMin = 0;
-      console.log(temp);
+      // console.log(temp);
       temp.forEach((el) => {
         var result = [el.open, el.high, el.low, el.close];
         temp2.push({

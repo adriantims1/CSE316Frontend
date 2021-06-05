@@ -45,7 +45,7 @@ export default function MessageCenter(props) {
   async function fetchData() {
     try {
       await getAllMessagesAPIMethod((res) => {
-        console.log(res.data.data.infos);
+        // console.log(res.data.data.infos);
         var temp = [];
         res.data.data.infos.forEach((el) => {
           temp.push({
@@ -74,7 +74,7 @@ export default function MessageCenter(props) {
   const classes = styles();
   return (
     <Container className={classes.contentContainer}>
-      <DataGrid rows={rows} columns={columns} pageSize={10} />
+      <DataGrid rows={rows} columns={columns} pageSize={7} />
     </Container>
   );
 }

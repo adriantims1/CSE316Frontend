@@ -30,7 +30,8 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard(props) {
-  console.log(localStorage.getItem("isAdmin"));
+  // console.log("Dashboard",props.pass);
+  // console.log(localStorage.getItem("isAdmin"));
 
   const [isAdmin] = useState(JSON.parse(localStorage.getItem("isAdmin")));
   const [executed, setExecuted] = useState(false);

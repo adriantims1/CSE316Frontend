@@ -68,7 +68,7 @@ async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
-    console.log("testing");
+    // console.log("testing");
     const res = await parseJSON(response);
 
     const error = new Error(`HTTP Error: ${response.statusText}`);

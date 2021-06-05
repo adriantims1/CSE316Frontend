@@ -79,7 +79,7 @@ export default function MessageCenter() {
             ).toFixed(2)
           );
         });
-        console.log(arrCandle);
+        // console.log(arrCandle);
         setSeries([
           {
             name: "Data-1",

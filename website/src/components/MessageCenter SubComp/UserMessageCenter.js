@@ -47,7 +47,7 @@ export default function MessageCenter(props) {
           });
         });
         setRows(temp);
-        console.log("Printing here", temp);
+        // console.log("Printing here", temp);
       });
     } catch (err) {
       alert(err.response);
@@ -62,7 +62,7 @@ export default function MessageCenter(props) {
   const classes = styles();
   return (
     <Container className={classes.contentContainer}>
-      <DataGrid rows={rows} columns={columns} pageSize={10} />
+      <DataGrid rows={rows} columns={columns} pageSize={7} />
     </Container>
   );
 }

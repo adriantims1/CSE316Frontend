@@ -49,7 +49,7 @@ export default function LoginForm(props) {
         localStorage.setItem("balance", res.data.data.balance);
         props.setPass(pass);
         await getprofileurlAPIMethod((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           localStorage.setItem("accountType", res.data.data.accountType);
           localStorage.setItem("name", res.data.data.name);
           localStorage.setItem("profile_url", res.data.data.profile_url);
@@ -69,19 +69,20 @@ export default function LoginForm(props) {
       });
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      alert(err);
     }
   };
 
   const sendSignUpInfo = (e) => {
-    console.log("Signing up for: ", email);
+    // console.log("Signing up for: ", email);
 
     try {
       if (!email_validator.validate(email)) {
         throw new Error("Invalid email!")
       }
       signUpAPIInfo({ name: name, email: email, password: pass }, (res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.data.message) {
           alert(res.data.data.message);
         }

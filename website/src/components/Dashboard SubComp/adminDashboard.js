@@ -94,6 +94,7 @@ export default function AdminDashboard(props) {
   useEffect(() => {
     async function fetchData() {
       try {
+        // console.log("Email:", localStorage.getItem("email") + " Password: " + { ...props });
         await adminLoginAPIMethod(
           {
             email: localStorage.getItem("email"),
@@ -101,7 +102,7 @@ export default function AdminDashboard(props) {
           },
           async (res) => {
             await getAllUsersAPIMethod((res) => {
-              console.log(res.data.data); //console log all users
+              // console.log(res.data.data); //console log all users
 
               localStorage.setItem(
                 "users",
@@ -123,7 +124,7 @@ export default function AdminDashboard(props) {
           }
         );
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         alert(err.response);
       }
     }

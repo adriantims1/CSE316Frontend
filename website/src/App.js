@@ -40,6 +40,8 @@ const theme = createMuiTheme({
 });
 function App() {
   const [pass, setPass] = useState("");
+  // console.log("From the app", pass);
+
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   makeStyles,
   withStyles,
@@ -67,11 +67,7 @@ export default function ProfileElement(props) {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  useEffect(() => {
-    console.log(localStorage.getItem("email"));
-    console.log(localStorage.getItem("profile_url"));
-
-  }, []);
+  
 
   var pictureRef = useRef(null);
   const handleEmail = (e) => {
@@ -146,7 +142,7 @@ export default function ProfileElement(props) {
       await uploadImageToCloudinaryAPIMethod(formData, (res) => {
         setPicture(res.url);
         props.setProfilePicture(res.url);
-        console.log(res.url);
+        // console.log(res.url);
         localStorage.setItem("profile_url", res.url);
 
       });

@@ -64,7 +64,7 @@ export default function FormElement() {
     var temp = activeTime;
     temp[index] = e.target.value;
     setActiveTime(temp);
-    console.log(activeTime);
+    // console.log(activeTime);
   };
   const handleMarket = (e) => {
     setMarket(e.target.value);

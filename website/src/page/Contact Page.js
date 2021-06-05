@@ -63,7 +63,7 @@ const Contact = (props) => {
   const [messageError, setMessageError] = useState(false);
 
   const onChange_name = (e) => {
-    console.log(nameError);
+    // console.log(nameError);
     if (nameError) setNameError(false);
     setName(e.target.value);
   };
@@ -79,11 +79,11 @@ const Contact = (props) => {
   };
 
   const sendContactInfo = async (e) => {
-    console.log([name, email, message]);
+    // console.log([name, email, message]);
 
     try {
       if (!name || !email || !message) {
-        console.log(name, email, message);
+        // console.log(name, email, message);
         if (!name) setNameError(true);
         if (!email) setEmailError(true);
         if (!message) setMessageError(true);
@@ -103,7 +103,7 @@ const Contact = (props) => {
       });
       onClick_send(e);
     } catch (err) {
-      console.log("FrontEnd: ", err);
+      // console.log("FrontEnd: ", err);
       setSnackbarMessage(err.response);
       setStatus("error");
       setOpen(true);

@@ -69,7 +69,7 @@ const StyledButton = withStyles((theme) => ({
 
 export default function Navbar(props) {
   const classes = useStyles();
-  console.log(localStorage.getItem("isLoggedin"));
+  // console.log(localStorage.getItem("isLoggedin"));
 
   const [login, setLogin] = useState(false);
   const history = useHistory();
@@ -157,7 +157,7 @@ export default function Navbar(props) {
                     size="medium"
                     onClick={async (e) => {
                       const sessId = await CheckOnlineAPIMethod();
-                      console.log(sessId.data);
+                      // console.log(sessId.data);
                       if (sessId.data !== undefined && localStorage.getItem("isLoggedin")) {
                         history.push("/dashboard");
                       } else {

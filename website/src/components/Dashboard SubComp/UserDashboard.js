@@ -50,7 +50,7 @@ export default function UserDashboard() {
     async function fetchData() {
       try {
         await getBinomoDealsAPIMethod(5, (res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           setDeals(res.data.data);
         });
       } catch (err) {
