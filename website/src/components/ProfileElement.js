@@ -69,6 +69,8 @@ export default function ProfileElement(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   useEffect(() => {
     console.log(localStorage.getItem("email"));
+    console.log(localStorage.getItem("profile_url"));
+
   }, []);
 
   var pictureRef = useRef(null);
@@ -85,47 +87,56 @@ export default function ProfileElement(props) {
     setConfirmPassword(e.target.value);
   };
 
+
   const onClickSave = async (e) => {
     try {
-      const currPassword = await checkPasswordAPIMethod({
-        password: oldPassword,
-      });
-      if (!currPassword.data.success) {
-        setSuccess("warning");
+      if (oldPassword === "") {
+        console.log("profile pic change", oldPassword);
+        if (email) {
+          changeProfileAPIMethod({
+            email: email,
+            profile_url: picture,
+          });
+        } else {
+          changeProfileAPIMethod({
+            profile_url: picture,
+          });
+        }
+        setSuccess("success");
         setOpen(true);
-        setSnackBarMessage("Wrong old password");
-        return;
+        setSnackBarMessage("Profile Updated");
       }
-      if (confirmPassword !== newPassword) {
-        setSuccess("warning");
+      else {
+        const currPassword = await checkPasswordAPIMethod({
+          password: oldPassword,
+        });
+        if (!currPassword.data.success) {
+          setSuccess("warning");
+          setOpen(true);
+          setSnackBarMessage("Wrong old password");
+          return;
+        }
+        if (confirmPassword !== newPassword) {
+          setSuccess("warning");
+          setOpen(true);
+          setSnackBarMessage("Confirm your password");
+          return;
+        }
+        if (newPassword)
+          changePasswordAPIMethod({
+            password: newPassword,
+          });
+        setSuccess("success");
         setOpen(true);
-        setSnackBarMessage("Confirm your password");
-        return;
+        setSnackBarMessage("Profile Updated");
       }
-      if (email) {
-        changeProfileAPIMethod({
-          email: email,
-          profile_url: picture,
-        });
-      } else {
-        changeProfileAPIMethod({
-          profile_url: picture,
-        });
-      }
-
-      if (newPassword)
-        changePasswordAPIMethod({
-          password: newPassword,
-        });
-      localStorage.setItem("profile_url", picture);
-      setSuccess("success");
-      setOpen(true);
-      setSnackBarMessage("Profile Updated");
-    } catch (err) {
+    }
+    catch (err) {
       setSuccess("error");
       setOpen(true);
       setSnackBarMessage("Fail to Update");
     }
+
   };
 
   const handleSnackbarClose = (e) => {
@@ -150,7 +161,12 @@ export default function ProfileElement(props) {
     formData.append("file", selectedFile);
     uploadImageToCloudinaryAPIMethod(formData, (res) => {
       setPicture(res.url);
+      props.setProfilePicture(res.url);
+      console.log(res.url);
+      localStorage.setItem("profile_url", res.url);
+
     });
+
   };
   return (
     <>

@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { LoginAPIMethod } from "../api/generalClient";
-import { getprofileurlAPIMethod } from "../api/profileClient";
+import { getprofileurlAPIMethod, changeProfileAPIMethod } from "../api/profileClient";
 
 const StyledButton = withStyles((theme) => ({
   root: {
@@ -43,7 +43,6 @@ export default function LoginForm() {
     setOpen(false);
   };
 
-
   const sendLoginInfo = async (e) => {
     try {
       await LoginAPIMethod({ email: email, password: pass }, async (res) => {
@@ -62,6 +61,11 @@ export default function LoginForm() {
           history.push(`/dashboard`);
         });
       });
+
+      await changeProfileAPIMethod({
+        balance: localStorage.getItem("balance"),
+      });
+
     } catch (err) {
       console.log(err);
       setOpen(true);

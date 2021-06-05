@@ -32,8 +32,15 @@ export default function UserHeader(props) {
     localStorage.getItem("profile_url")
   );
 
+  const checkProfileUrl = () => {
+    if (props.profile)
+      return props.profile
+    else {
+      return profile_url
+    }
+  };
   useEffect(() => {
-    setProfile_url(localStorage.getItem("profile_url"));
+    // setProfile_url(localStorage.getItem("profile_url"));
   }, []);
 
   const classes = styles();
@@ -50,7 +57,7 @@ export default function UserHeader(props) {
       >
         <NavLink to="/profile">
           <img
-            src={profile_url}
+            src={checkProfileUrl()}
             style={{
               height: "75px",
               width: "75px",
