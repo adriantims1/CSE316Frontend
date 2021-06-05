@@ -49,6 +49,9 @@ const StyledButton = withStyles((theme) => ({
   },
 }))(Button);
 export default function SettingsElement() {
+
+
+
   const classes = styles();
   const [automatic, setAutomatic] = useState(true);
   const [startAmount, setStartAmount] = useState(0);

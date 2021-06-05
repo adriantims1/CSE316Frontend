@@ -47,6 +47,7 @@ export default function UserDashboard() {
   const [deals, setDeals] = useState([]);
 
   useEffect(() => {
+    
     async function fetchData() {
       try {
         await getBinomoDealsAPIMethod(5, (res) => {

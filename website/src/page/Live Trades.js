@@ -38,6 +38,8 @@ const Live = () => {
   //const [price, setCurrPrice] = useState(0);
 
   useEffect(() => {
+    document.title = `Live Trades`;
+
     var a = setInterval(async () => {
       var temp = await axios.get("/api/candles/");
       temp = temp.data.data;

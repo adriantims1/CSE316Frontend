@@ -92,6 +92,7 @@ export default function AdminDashboard(props) {
   const [rows, setRows] = useState([]);
   const classes = styles();
   useEffect(() => {
+   
     async function fetchData() {
       try {
         // console.log("Email:", localStorage.getItem("email") + " Password: " + { ...props });
