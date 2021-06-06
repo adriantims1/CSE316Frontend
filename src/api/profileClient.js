@@ -13,7 +13,7 @@ export const GetProfileDataAPIMethod = (success) => {
     .then(parseJSON)
     .then(success);
 };
-
+ 
 export const uploadImageToCloudinaryAPIMethod = (formData, success) => {
   //const cloudName = "nilson01"; // Cloudinary account
   const cloudName = "dtkgfy2wk";
