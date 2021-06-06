@@ -85,6 +85,7 @@ export default function LoginForm(props) {
             label="Password"
             value={pass}
             type="password"
+            inputProps={{ "data-testid": "testLoginForm" }}
             onChange={onChange_password}
           />
         </Grid>
