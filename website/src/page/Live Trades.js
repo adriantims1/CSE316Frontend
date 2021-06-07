@@ -65,7 +65,7 @@ const Live = () => {
       ApexCharts.exec("realtime", "updateOptions", {
         yaxis: { min: resMin, max: resMax },
       });
-    }, 5000);
+    }, 1800);
 
     return () => {
       clearInterval(a);
