@@ -1,3 +1,11 @@
+
+# CSE316Frontend
+Testing: 
+1. Test password to be empty. How: npm test in website folder
+Hosted in Netlify: www.adrianstudy.computer
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
