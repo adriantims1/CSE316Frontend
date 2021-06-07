@@ -4,10 +4,14 @@ const defaultHeaders = {
     "Content-Type": "application/json; charset=UTF-8",
   },
 };
+
 export const adminLoginAPIMethod = (data, success) => {
   return axios
-    .post("https://datafetcherforbinomo.azurewebsites.net/api/admin/login", data, {
-      withCredentials: true,
+    .post("/api/admin/login", data, {
+      headers: {
+        withCredentials: true,
+        credentials: 'include',
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -15,8 +19,10 @@ export const adminLoginAPIMethod = (data, success) => {
 
 export const deleteUserAPIMethod = (data, success) => {
   return axios
-    .delete(`https://datafetcherforbinomo.azurewebsites.net/api/admin/usersInfo/${data.id}`, {
-      withCredentials: true,
+    .delete(`/api/admin/usersInfo/${data.id}`, {
+      headers: {
+        withCredentials: true,
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -24,18 +30,23 @@ export const deleteUserAPIMethod = (data, success) => {
 
 export const getAllUsersAPIMethod = (success) => {
   return axios
-    .get("https://datafetcherforbinomo.azurewebsites.net/api/admin/usersInfo", {
-      withCredentials: true,
+    .get("/api/admin/usersInfo", {
+      headers: {
+        withCredentials: true,
+      },
     })
     .then(checkStatus)
     .then(success);
 };
 
 
+
 export const getAllMessagesAPIMethod = (success) => {
   return axios
-    .get("https://datafetcherforbinomo.azurewebsites.net/api/admin/ContactUs", {
-      withCredentials: true,
+    .get("/api/admin/ContactUs", {
+      headers: {
+        withCredentials: true,
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -43,7 +54,7 @@ export const getAllMessagesAPIMethod = (success) => {
 
 
 export const NotifyAPIMethod = (userInfo, success) => {
-  return fetch(`https://datafetcherforbinomo.azurewebsites.net/api/admin/notify`, {
+  return fetch(`/api/admin/notify`, {
     ...defaultHeaders,
     method: "POST",
     body: JSON.stringify(userInfo),

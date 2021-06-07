@@ -6,7 +6,7 @@ const defaultHeaders = {
 };
 
 export const ContactUsInfoAPIMethod = (userInfo, success) => {
-  return fetch(`https://datafetcherforbinomo.azurewebsites.net/api/admin/ContactUs`, {
+  return fetch(`/api/admin/ContactUs`, {
     ...defaultHeaders,
     method: "POST",
     body: JSON.stringify(userInfo),
@@ -17,8 +17,10 @@ export const ContactUsInfoAPIMethod = (userInfo, success) => {
 
 export const getAllNotificationsAPIMethod = (success) => {
   return axios
-    .get("https://datafetcherforbinomo.azurewebsites.net/api/profile/notifications", {
-      withCredentials: true,
+    .get("/api/profile/notifications", {
+      headers: {
+        withCredentials: true,
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -26,8 +28,11 @@ export const getAllNotificationsAPIMethod = (success) => {
 
 export const signUpAPIInfo = (profile, success) => {
   return axios
-    .post(`https://datafetcherforbinomo.azurewebsites.net/api/profile/register`, profile, {
-      withCredentials: true,
+    .post(`/api/profile/register`, profile, {
+      headers: {
+        withCredentials: true,
+        credentials: 'include',
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -35,8 +40,11 @@ export const signUpAPIInfo = (profile, success) => {
 
 export const LoginAPIMethod = (profile, success) => {
   return axios
-    .post(`https://datafetcherforbinomo.azurewebsites.net/api/profile/login`, profile, {
-      withCredentials: true,
+    .post(`/api/profile/login`, profile, {
+      headers: {
+        withCredentials: true,
+        credentials: 'include',
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -44,25 +52,30 @@ export const LoginAPIMethod = (profile, success) => {
 export const LogoutAPIMethod = (success) => {
   return axios
     .post(
-      `https://datafetcherforbinomo.azurewebsites.net/api/profile/logout`,
-      {},
-      {
+      `/api/profile/logout`, {}, {
+      headers: {
         withCredentials: true,
-      }
+        credentials: 'include',
+      },
+    }
     )
     .then(checkStatus)
     .then(success);
 };
+
 export const CheckOnlineAPIMethod = (profile, success) => {
-  return fetch(`https://datafetcherforbinomo.azurewebsites.net/api/profile/checkonline`, {
-    ...defaultHeaders,
-    method: "GET",
-    credentials: "include",
-  })
+  return axios
+    .get(
+      `/api/profile/checkonline`, {
+      headers: {
+        withCredentials: true,
+      },
+    }
+    )
     .then(checkStatus)
-    .then(parseJSON)
     .then(success);
 };
+
 
 async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {

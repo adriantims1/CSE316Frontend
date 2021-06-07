@@ -1,19 +1,16 @@
 import axios from "axios";
-const defaultHeaders = {
-  headers: {
-    "Content-Type": "application/json; charset=UTF-8",
-  },
-};
+
 export const GetProfileDataAPIMethod = (success) => {
-  return fetch(`https://datafetcherforbinomo.azurewebsites.net/api/profile/checkOnline`, {
-    ...defaultHeaders,
-    method: "GET",
-  })
+  return axios
+    .get("/api/profile/checkOnline", {
+      headers: {
+        withCredentials: true,
+      },
+    })
     .then(checkStatus)
-    .then(parseJSON)
     .then(success);
 };
- 
+
 export const uploadImageToCloudinaryAPIMethod = (formData, success) => {
   //const cloudName = "nilson01"; // Cloudinary account
   const cloudName = "dtkgfy2wk";
@@ -31,8 +28,10 @@ export const uploadImageToCloudinaryAPIMethod = (formData, success) => {
 
 export const getprofileurlAPIMethod = (success) => {
   return axios
-    .get("https://datafetcherforbinomo.azurewebsites.net/api/profile/profileHeader", {
-      withCredentials: true,
+    .get("/api/profile/profileHeader", {
+      headers: {
+        withCredentials: true,
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -40,8 +39,10 @@ export const getprofileurlAPIMethod = (success) => {
 
 export const getBinomoDealsAPIMethod = (amount, success) => {
   return axios
-    .get(`https://datafetcherforbinomo.azurewebsites.net/api/profile/fetchBinomoDeals/${amount}`, {
-      withCredentials: true,
+    .get(`/api/profile/fetchBinomoDeals/${amount}`, {
+      headers: {
+        withCredentials: true,
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -50,8 +51,11 @@ export const getBinomoDealsAPIMethod = (amount, success) => {
 
 export const changeProfileAPIMethod = (data, success) => {
   return axios
-    .post("https://datafetcherforbinomo.azurewebsites.net/api/profile/settings", data, {
-      withCredentials: true,
+    .post("/api/profile/settings", data, {
+      headers: {
+        withCredentials: true,
+        credentials: 'include',
+      },
     })
     .then(checkStatus)
     .then(success);
@@ -59,16 +63,22 @@ export const changeProfileAPIMethod = (data, success) => {
 
 export const changePasswordAPIMethod = (data, success) => {
   return axios
-    .post("https://datafetcherforbinomo.azurewebsites.net/api/profile/changePassword", data, {
-      withCredentials: true,
+    .post("/api/profile/changePassword", data, {
+      headers: {
+        withCredentials: true,
+        credentials: 'include',
+      },
     })
     .then(checkStatus)
     .then(success);
 };
 export const checkPasswordAPIMethod = (data, success) => {
   return axios
-    .post("https://datafetcherforbinomo.azurewebsites.net/api/profile/checkPassword", data, {
-      withCredentials: true,
+    .post("/api/profile/checkPassword", data, {
+      headers: {
+        withCredentials: true,
+        credentials: 'include',
+      },
     })
     .then(checkStatus)
 
