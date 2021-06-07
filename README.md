@@ -31,4 +31,5 @@ Simply running npm start kickstarts the backend using react amazing proxy if use
 <img src="/images/robot.png" width="400" height="200">
 <img src="/images/statistics.png" width="400" height="200">
 <img src="/images/adminnotification.png" width="400" height="200">
+<img src="/images/transactions.png" width="400" height="200">
 
