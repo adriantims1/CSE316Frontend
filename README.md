@@ -5,15 +5,17 @@ Hosted in Netlify: www.adrianstudy.computer
 
 ## Available Scripts
 
+It is recommended to be in with redux branch for testing locally!
 In the project directory, you can run:
 
-### `yarn test`
+### `yarn test` 
 
 Launches the test runner in the interactive watch mode.\
 1. Test password field to be empty initially. How: npm test in website folder
 
 ### `npm start`
 To run locally: Also available: yarn start
+Simply running npm start kickstarts the backend using react amazing proxy if useer is in "withredux" git-branch.
 
 ### `web preview`
 
