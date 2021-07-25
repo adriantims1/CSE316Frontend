@@ -1,7 +1,8 @@
 import React from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import PaymentIcon from "@material-ui/icons/Payment";
-import SettingsIcon from "@material-ui/icons/Settings";
+
+import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import { NavLink } from "react-router-dom";
 import { IconButton, makeStyles } from "@material-ui/core";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
@@ -37,9 +38,9 @@ export default function userSidebar() {
           <PaymentIcon className={classes.icons} />
         </IconButton>
       </NavLink>
-      <NavLink to="/settings" activeClassName={classes.active}>
+      <NavLink to="/download" activeClassName={classes.active}>
         <IconButton>
-          <SettingsIcon className={classes.icons} />
+          <SystemUpdateAltIcon className={classes.icons} />
         </IconButton>
       </NavLink>
       <NavLink to="/contactUserVAdmin" activeClassName={classes.active}>

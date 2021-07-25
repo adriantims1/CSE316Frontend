@@ -8,7 +8,7 @@ import About from "./page/About Page";
 import Dashboard from "./page/Dashboard";
 import Admin from "./page/Admin";
 import Payment from "./page/Payment";
-import Settings from "./page/Settings";
+import Download from "./page/Download";
 import Profile from "./page/Profile";
 import PageNotFound from "./page/PageNotFound";
 import Statistics from "./page/Statistics";
@@ -23,8 +23,7 @@ import { Switch, Route } from "react-router-dom";
 import CheckOnline from "./components/CheckOnline";
 
 import { io } from "socket.io-client";
-var socket = io.connect('https://datafetcherforbinomo.azurewebsites.net');
-
+var socket = io.connect("https://datafetcherforbinomo.azurewebsites.net");
 
 const theme = createMuiTheme({
   palette: {
@@ -42,7 +41,6 @@ function App() {
   const [pass, setPass] = useState("");
   // console.log("From the app", pass);
 
-
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -50,8 +48,8 @@ function App() {
           <Route path="/profile">
             <CheckOnline success={<Profile />} />
           </Route>
-          <Route path="/settings">
-            <CheckOnline success={<Settings />} />
+          <Route path="/download">
+            <CheckOnline success={<Download />} />
           </Route>
           <Route path="/payment">
             <CheckOnline success={<Payment />} />
@@ -89,7 +87,6 @@ function App() {
           <Route path="*" exact={true}>
             <Navbar setPass={setPass} /> <PageNotFound />
           </Route>
-
         </Switch>
       </div>
     </ThemeProvider>

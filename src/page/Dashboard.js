@@ -51,18 +51,14 @@ export default function Dashboard(props) {
         localStorage.setItem("accountType", res.data.data.accountType);
         localStorage.setItem("name", res.data.data.name);
         localStorage.setItem("profile_url", res.data.data.profile_url);
-        localStorage.setItem(
-          "setting",
-          JSON.stringify(res.data.data.setting)
-        );
+        localStorage.setItem("setting", JSON.stringify(res.data.data.setting));
         localStorage.setItem("isAdmin", res.data.data.isAdmin);
         localStorage.setItem("email", res.data.data.email);
       });
-
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     document.title = `Dashboard`;
@@ -76,12 +72,13 @@ export default function Dashboard(props) {
             element.status === "won"
               ? (won = won + 1)
               : element.status === "lost"
-                ? (loss = loss + 1)
-                : (tie = tie + 1)
+              ? (loss = loss + 1)
+              : (tie = tie + 1)
           );
           localStorage.setItem("seriesD", [won, loss, tie]);
         });
       } catch (err) {
+        console.log(err);
         alert(err.response);
       }
     }
@@ -93,7 +90,7 @@ export default function Dashboard(props) {
       <Sidebar />
       <Grid item className={classes.rightbar}>
         <Paper className={classes.rightContainer}>
-          {(localStorage.getItem("isAdmin") === null) ? sendLoginInfo() : null}
+          {localStorage.getItem("isAdmin") === null ? sendLoginInfo() : null}
           <UserHeader page="Dashboard" />
           {isAdmin ? <AdminDashboard pass={props.pass} /> : <UserDashboard />}
         </Paper>

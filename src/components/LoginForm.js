@@ -9,7 +9,10 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { LoginAPIMethod } from "../api/generalClient";
-import { getprofileurlAPIMethod, changeProfileAPIMethod } from "../api/profileClient";
+import {
+  getprofileurlAPIMethod,
+  changeProfileAPIMethod,
+} from "../api/profileClient";
 
 const StyledButton = withStyles((theme) => ({
   root: {
@@ -46,10 +49,13 @@ export default function LoginForm(props) {
   const sendLoginInfo = async (e) => {
     try {
       await LoginAPIMethod({ email: email, password: pass }, async (res) => {
+        console.log(res);
         localStorage.setItem("balance", res.data.data.balance);
+        localStorage.setItem("authtoken", res.data.data.authtoken);
+        localStorage.setItem("deviceid", res.data.data.deviceid);
         props.setPass(pass);
         await getprofileurlAPIMethod((res) => {
-          // console.log(res.data.data);
+          console.log(res.data.data);
           localStorage.setItem("accountType", res.data.data.accountType);
           localStorage.setItem("name", res.data.data.name);
           localStorage.setItem("profile_url", res.data.data.profile_url);
@@ -59,6 +65,7 @@ export default function LoginForm(props) {
           );
           localStorage.setItem("isAdmin", res.data.data.isAdmin);
           localStorage.setItem("email", res.data.data.email);
+
           history.push(`/dashboard`);
         });
       });
@@ -66,13 +73,11 @@ export default function LoginForm(props) {
       await changeProfileAPIMethod({
         balance: localStorage.getItem("balance"),
       });
-
     } catch (err) {
       // console.log(err);
       setOpen(true);
     }
   };
-
 
   return (
     <>
